@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/view_button_state"
+        android:drawableLeft="@drawable/ic_view"
+        android:drawableTint="@drawable/view_button_state"
+        android:gravity="center_vertical"
+        android:text=" View"
+        android:textAllCaps="false"
+        android:textColor="@drawable/view_button_state"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnRestore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/restore_button_state"
+        android:drawableLeft="@drawable/ic_restore"
+        android:drawableTint="@drawable/restore_button_state"
+        android:gravity="center_vertical"
+        android:text=" Restore"
+        android:textAllCaps="false"
+        android:textColor="@drawable/restore_button_state"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnRestore"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/delete_button_state"
+        android:drawableLeft="@drawable/ic_delete_forever"
+        android:drawableTint="@drawable/delete_button_state"
+        android:gravity="center_vertical"
+        android:text=" Delete"
+        android:textAllCaps="false"
+        android:textColor="@drawable/delete_button_state"
+        android:textSize="22sp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+        <ImageView
+            android:id="@+id/iv_item_view_type_icon"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+           />
+
+
+        <TextView
+            android:id="@+id/tv_fill_up_type_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/iv_item_view_type_icon"
+            android:text="Text View"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_fill_up_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_item_view_type_icon"
+            android:layout_marginBottom="-30dp"
+            android:text="Title"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_alignTop="@id/tv_fill_up_title"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/fill_up_border"
+            android:textSize="18sp"
+            android:text="Hello World"
+            android:inputType="text"
+            android:padding="10dp"
+           />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_title"
+            android:layout_marginTop="50dp"
+            android:text="Date"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_date_value"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_date"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/fill_up_border"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Jan 20, 2015"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_date_value"
+            android:layout_marginTop="44dp"
+            android:text="Time"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_time_value"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_time"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/fill_up_border"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="12:10 AM"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_time_value"
+            android:layout_marginTop="44dp"
+            android:text="Monetary Value"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_monetary_value"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_alignTop="@id/tv_value"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/fill_up_border"
+            android:textSize="18sp"
+            android:text="100"
+            android:textColor="@color/dark_grey"
+            android:layout_marginBottom="5dp"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/btn_done"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@mipmap/ic_done"
+            android:layout_alignTop="@id/tv_value"
+            android:layout_marginTop="26dp"
+            android:layout_alignLeft="@id/tv_monetary_value"
+            android:layout_marginLeft="200dp"/>
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
