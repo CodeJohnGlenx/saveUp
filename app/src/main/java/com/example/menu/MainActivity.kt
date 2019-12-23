@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import com.example.menu.Data.DataClass
 import com.example.menu.Fragments.CalendarFragment
 import com.example.menu.Fragments.HomeFragment
+import com.example.menu.Fragments.StatisticsFragment
 import com.example.menu.Fragments.TrashFragment
 import com.example.menu.Model.Expenditure
 import com.example.menu.Model.Supplier
@@ -99,6 +100,11 @@ class MainActivity : AppCompatActivity(),
                 ShowTrashFragment()
                 this.setTitle("Trash")
             }
+
+            R.id.nav_statistics -> {
+                ShowStatisticsFragment()
+                this.setTitle("Statistics")
+            }
         }
         drawer_layout!!.closeDrawer(GravityCompat.START)  // close drawer layout once item is selected
         return true
@@ -140,6 +146,7 @@ class MainActivity : AppCompatActivity(),
     fun ShowHomeFragment() {  // showing the home fragment
         val transaction = manager.beginTransaction()
         val fragment = HomeFragment()
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
         transaction.replace(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
@@ -151,6 +158,7 @@ class MainActivity : AppCompatActivity(),
     fun ShowCalendarFragment() {  // showing the calendar fragment
         val transaction = manager.beginTransaction()
         val fragment = CalendarFragment()
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
         transaction.replace(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
@@ -159,6 +167,16 @@ class MainActivity : AppCompatActivity(),
     fun ShowTrashFragment() {  // showing the calendar fragment
         val transaction = manager.beginTransaction()
         val fragment = TrashFragment()
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    fun ShowStatisticsFragment() {
+        val transaction = manager.beginTransaction()
+        val fragment = StatisticsFragment()
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
         transaction.replace(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()

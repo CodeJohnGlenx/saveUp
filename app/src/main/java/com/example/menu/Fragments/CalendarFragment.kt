@@ -15,10 +15,13 @@ import com.example.menu.Model.Expenditure
 import com.example.menu.Model.Supplier
 import com.example.menu.R
 import com.example.menu.RealmClass.ItemModel
+import com.squareup.timessquare.CalendarPickerView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.fragment_calendar.*
+import kotlinx.android.synthetic.main.fragment_calendar.testCalendar
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.test.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,8 +54,9 @@ class CalendarFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setCalendar()
+        clickCalendarDate()
         super.onViewCreated(view, savedInstanceState)
-        clickDateCalendar()
 
     }
 
@@ -86,40 +90,61 @@ class CalendarFragment : Fragment() {
         super.onDetach()
     }
 
-    fun clickDateCalendar() {
-        fragment_calendar_calendar_view.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val selectedDate = Calendar.getInstance()
-            selectedDate.set(Calendar.YEAR, year)
-            selectedDate.set(Calendar.MONTH, month)
-            selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            val dateString = dateFormat.format(selectedDate.time)
+    fun setCalendar() {
+        var today = Date()
+        var nextYear = Calendar.getInstance()
+        nextYear.add(Calendar.YEAR, 1)
+        var previousYear = Calendar.getInstance()
+        previousYear.add(Calendar.YEAR, -1)
 
-
-            val allItems = realm.where(ItemModel::class.java).findAll()
-            Supplier.expenditures.clear()
-            allItems.forEach { thisItem ->
-                var thisItemDateString = dateFormat.format(thisItem.itemDate!!.time)
-                if (dateString == thisItemDateString) {
-                    Supplier.expenditures.add(0, Expenditure(thisItem.itemTitle!!, thisItem.itemValue!!, thisItem.itemId!!, thisItem.itemType!!))
-                }
-            }
-
-            showHomeFragment()
-            activity!!.setTitle("Home")
-            Toast.makeText(context!!, dateString, Toast.LENGTH_SHORT).show()
-
-
-        }
+        testCalendar.init(previousYear.time, nextYear.time).withSelectedDate(today)
     }
 
     private fun showHomeFragment() {
         val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
         val fragment = HomeFragment()
-        transaction.replace(R.id.fragment_container, fragment)
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
+        transaction.replace(com.example.menu.R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
 
     }
+
+
+    fun clickCalendarDate() {
+        testCalendar.setOnDateSelectedListener(object : CalendarPickerView.OnDateSelectedListener {
+            override fun onDateSelected(date: Date) {
+                //String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(date);
+
+                val calSelected = Calendar.getInstance()
+                calSelected.time = date
+
+                val selectedDate = ("" + calSelected.get(Calendar.DAY_OF_MONTH)
+                        + " " + (calSelected.get(Calendar.MONTH) + 1)
+                        + " " + calSelected.get(Calendar.YEAR))
+
+                Toast.makeText(context, selectedDate, Toast.LENGTH_SHORT).show()
+
+
+                val allItems = realm.where(ItemModel::class.java).findAll()
+                Supplier.expenditures.clear()
+                allItems.forEach { thisItem ->
+                    var thisItemDateString = dateFormat.format(thisItem.itemDate!!.time)
+                    if (dateFormat.format(calSelected.time) == thisItemDateString) {
+                        Supplier.expenditures.add(0, Expenditure(thisItem.itemTitle!!, thisItem.itemValue!!, thisItem.itemId!!, thisItem.itemType!!))
+                    }
+                }
+
+                showHomeFragment()
+                activity!!.setTitle("Home")
+                Toast.makeText(context!!, dateFormat.format(calSelected.time), Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onDateUnselected(date: Date) {
+            }
+        })
+    }
+
 
 
 

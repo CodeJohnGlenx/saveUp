@@ -10,7 +10,6 @@
         <item name="android:dialogTheme">@style/MyDialogTheme</item>
         <item name="android:datePickerStyle">@style/MyDatePicker</item>
         <item name="android:timePickerStyle">@style/MyTimePicker</item> -->
-
     </style>
     
     <style name="AppTheme.NoActionBar">
@@ -18,9 +17,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.GreenAccent">
-        <item name="colorAccent">@color/red</item>
-    </style>
     <!--
     <style name="MyDialogTheme" parent="android:Theme.Material.Light.Dialog">
         <item name="android:datePickerStyle">@style/MyDatePicker</item>
@@ -36,6 +32,8 @@
         <item name="android:timePickerMode">spinner</item>
     </style>
     -->
+
+
 
 
 

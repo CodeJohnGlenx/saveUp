@@ -127,7 +127,8 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_alignTop="@+id/progressCardView"
-        android:layout_marginTop="105dp" />
+        android:layout_marginTop="105dp"
+        android:layoutAnimation="@anim/layout_animation"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"

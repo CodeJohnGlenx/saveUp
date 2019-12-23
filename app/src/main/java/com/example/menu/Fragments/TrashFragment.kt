@@ -128,6 +128,7 @@ class TrashFragment : Fragment() {
     private fun showTrashFragment() {
         val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
         val fragment = TrashFragment()
+
         transaction.replace(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()

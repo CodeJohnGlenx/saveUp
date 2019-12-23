@@ -22,8 +22,11 @@ import com.example.menu.Data.DataClass
 import com.example.menu.Dialogs.CustomListViewDialog
 import com.example.menu.Dialogs.FillUpDialog
 import com.example.menu.Model.Supplier
-import com.example.menu.R
 import kotlinx.android.synthetic.main.fragment_home.*
+
+import androidx.core.content.ContextCompat
+import android.R.string.cancel
+import java.util.*
 
 
 // all about Home Fragment
@@ -160,6 +163,10 @@ class HomeFragment : Fragment(),
     }
 
     private fun displayProgressBar() {
+        var draw = ContextCompat.getDrawable(
+            context!!,
+            com.example.menu.R.drawable.custom_progress_bar_green
+        )
         var fundValue: Double = 0.0
         var expensesValue: Double = 0.0
         var balanceValue: Double = 0.0
@@ -187,17 +194,35 @@ class HomeFragment : Fragment(),
 
 
         progressBar.progress = ((balances - expenses) / balances * 100).toInt()
-        if (progressBar.progress >= 60) {
-           // progressBar.progressDrawable = com.example.menu.R.drawable.custom_progress_bar_green.toDrawable()
-        } else if (progressBar.progress >= 40) {
-           // progressBar.progressDrawable = com.example.menu.R.drawable.custom_progress_bar_yellow.toDrawable()
-        } else if (progressBar.progress >= 25) {
-           // progressBar.progressDrawable = com.example.menu.R.drawable.custom_progress_bar_orange.toDrawable()
+        if (progressBar.progress >= 50) {
+            draw = ContextCompat.getDrawable(
+                context!!,
+                com.example.menu.R.drawable.custom_progress_bar_green
+            )
+        } else if (progressBar.progress >= 35) {
+            draw = ContextCompat.getDrawable(
+                context!!,
+                com.example.menu.R.drawable.custom_progress_bar_yellow
+            )
+        } else if (progressBar.progress >= 20) {
+            draw = ContextCompat.getDrawable(
+                context!!,
+                com.example.menu.R.drawable.custom_progress_bar_orange
+            )
+        } else if (fundValue == 0.0 && balanceValue == 0.0 && expensesValue == 0.0) {
+            draw = ContextCompat.getDrawable(
+                context!!,
+                com.example.menu.R.drawable.custom_progress_bar_light_grey
+            )
         } else {
-           // progressBar.progressDrawable = com.example.menu.R.drawable.custom_progress_bar_red.toDrawable()
+            draw = ContextCompat.getDrawable(
+                context!!,
+                com.example.menu.R.drawable.custom_progress_bar_red
+            )
         }
-
+        progressBar.progressDrawable = draw
 
     }
+
 
 }

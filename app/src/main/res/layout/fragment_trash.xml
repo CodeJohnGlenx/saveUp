@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="649dp"
         android:layout_alignParentTop="true"
+        android:layoutAnimation="@anim/layout_animation"
          />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
