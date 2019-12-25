@@ -119,15 +119,14 @@ class CalendarFragment : Fragment() {
                 val calSelected = Calendar.getInstance()
                 calSelected.time = date
 
-                val selectedDate = ("" + calSelected.get(Calendar.DAY_OF_MONTH)
-                        + " " + (calSelected.get(Calendar.MONTH) + 1)
-                        + " " + calSelected.get(Calendar.YEAR))
+                val selectedDate = dateFormat.format(calSelected.time)
 
                 Toast.makeText(context, selectedDate, Toast.LENGTH_SHORT).show()
 
 
                 val allItems = realm.where(ItemModel::class.java).findAll()
                 Supplier.expenditures.clear()
+
                 allItems.forEach { thisItem ->
                     var thisItemDateString = dateFormat.format(thisItem.itemDate!!.time)
                     if (dateFormat.format(calSelected.time) == thisItemDateString) {

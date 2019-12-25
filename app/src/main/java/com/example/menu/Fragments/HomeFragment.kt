@@ -220,7 +220,10 @@ class HomeFragment : Fragment(),
                 com.example.menu.R.drawable.custom_progress_bar_red
             )
         }
+
         progressBar.progressDrawable = draw
+
+
 
     }
 

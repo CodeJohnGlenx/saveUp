@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="@color/white">
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Statistics Fragment"
-        android:textSize="30sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <Spinner
+            android:id="@+id/spinner_options_statistics"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp" />
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/spinner_options_statistics"
+            android:id="@+id/statistics_expenses_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#58D68D "
+            android:text="Expenses"
+            android:paddingTop="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/statistics_pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_below="@+id/statistics_expenses_title"
+            android:background="#58D68D" />
+
+    </RelativeLayout>
+
+</ScrollView>
