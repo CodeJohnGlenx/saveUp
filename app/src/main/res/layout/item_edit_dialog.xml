@@ -69,7 +69,7 @@
             android:layout_height="36dp"
             android:layout_alignTop="@id/tv_date"
             android:layout_marginTop="30dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/custom_green_button_state"
             android:text="Set Date"
             android:textColor="@color/white"
             android:textStyle="bold" />
@@ -103,7 +103,7 @@
             android:layout_height="36dp"
             android:layout_alignTop="@id/tv_time"
             android:layout_marginTop="30dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/custom_green_button_state"
             android:text="Set Time"
             android:textColor="@color/white"
             android:textStyle="bold" />

@@ -11,6 +11,19 @@
         android:background="@color/white"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/buttonPickADate"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_green_button_state"
+            android:paddingHorizontal="10dp"
+            android:text="Pick a Date"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <Spinner
             android:id="@+id/spinner_options_statistics"
             android:layout_width="250dp"
@@ -19,14 +32,14 @@
             android:layout_marginEnd="0dp" />
 
         <TextView
-            android:layout_marginTop="30dp"
-            android:layout_below="@id/spinner_options_statistics"
             android:id="@+id/statistics_expenses_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#58D68D "
-            android:text="Expenses"
+            android:layout_below="@id/spinner_options_statistics"
+            android:layout_marginTop="30dp"
+            android:background="@color/light_green"
             android:paddingTop="20dp"
+            android:text="Expenses"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="26sp"
@@ -37,7 +50,327 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_below="@+id/statistics_expenses_title"
-            android:background="#58D68D" />
+            android:background="@color/light_green" />
+
+        <TextView
+            android:id="@+id/monetary_distribution_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/statistics_pie_chart"
+            android:layout_marginTop="30dp"
+            android:text="Monetary Distribution"
+            android:textAlignment="center"
+            android:textColor="@color/grey"
+            android:textSize="26sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/statistics_cash_deposit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Cash Deposit / Allowance"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/monetary_distribution_title"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/statistics_cash_deposit_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="100000.00"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/monetary_distribution_title"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+        <ProgressBar
+            android:paddingHorizontal="10dp"
+            android:id="@+id/statistics_progress_cash_deposit"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/custom_progress_bar_green"
+            android:layout_below="@id/statistics_cash_deposit_title"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+
+        <TextView
+            android:id="@+id/statistics_health_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Health"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_cash_deposit"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/statistics_health_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="100000.00"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_cash_deposit"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+        <ProgressBar
+            android:paddingHorizontal="10dp"
+            android:id="@+id/statistics_progress_health"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/custom_progress_bar_red"
+            android:layout_below="@id/statistics_health_title"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+        <TextView
+            android:id="@+id/statistics_beverages_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Beverages"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_health"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/statistics_beverages_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="100000.00"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_health"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+        <ProgressBar
+            android:paddingHorizontal="10dp"
+            android:id="@+id/statistics_progress_beverages"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/custom_progress_bar_orange"
+            android:layout_below="@id/statistics_beverages_title"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+        <TextView
+            android:id="@+id/statistics_food_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Food"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_beverages"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/statistics_food_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="100000.00"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_beverages"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+        <ProgressBar
+            android:paddingHorizontal="10dp"
+            android:id="@+id/statistics_progress_food"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/custom_progress_bar_yellow"
+            android:layout_below="@id/statistics_food_title"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+        <TextView
+            android:id="@+id/statistics_fare_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Fare / Transportation"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_food"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/statistics_fare_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="100000.00"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_food"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+        <ProgressBar
+            android:paddingHorizontal="10dp"
+            android:id="@+id/statistics_progress_fare"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/custom_progress_bar_blue"
+            android:layout_below="@id/statistics_fare_title"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+        <TextView
+            android:id="@+id/statistics_school_expenses_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="School Expenses / Education"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_fare"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/statistics_school_expenses_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="100000.00"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_fare"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+        <ProgressBar
+            android:paddingHorizontal="10dp"
+            android:id="@+id/statistics_progress_school_expenses"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/custom_progress_bar_purple"
+            android:layout_below="@id/statistics_school_expenses_title"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+        <TextView
+            android:id="@+id/statistics_entertainment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Entertainment"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_school_expenses"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/statistics_school_entertainment_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="100000.00"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_school_expenses"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+        <ProgressBar
+            android:paddingHorizontal="10dp"
+            android:id="@+id/statistics_progress_entertainment"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/custom_progress_bar_darkest_blue"
+            android:layout_below="@id/statistics_entertainment_title"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+        <TextView
+            android:id="@+id/statistics_miscellaneous_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Miscellaneous"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_entertainment"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/statistics_school_miscellaneous_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="100000.00"
+            android:textSize="14sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/statistics_progress_entertainment"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+        <ProgressBar
+            android:paddingHorizontal="10dp"
+            android:id="@+id/statistics_progress_miscellaneous"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/custom_progress_bar_grey"
+            android:layout_below="@id/statistics_miscellaneous_title"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+
+        <TextView
+            android:id="@+id/expenditure_activity_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/statistics_progress_miscellaneous"
+            android:layout_marginTop="40dp"
+            android:background="@color/light_green"
+            android:paddingTop="30dp"
+            android:text="Expenditure Activity"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/expenditure_activity_title_am"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/expenditure_activity_title"
+            android:background="@color/light_green"
+            android:paddingTop="10dp"
+            android:text="AM"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/statistics_am_line_chart"
+            android:layout_width="match_parent"
+            android:layout_below="@id/expenditure_activity_title_am"
+            android:background="@color/light_green"
+            android:layout_height="250dp"
+            android:padding="5dp"/>
 
     </RelativeLayout>
 

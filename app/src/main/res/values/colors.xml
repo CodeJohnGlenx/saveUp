@@ -13,4 +13,9 @@
     <color name="light_grey">#CCD1D1</color>
     <color name="light_white">#F2F3F4</color>
     <color name="purple">#9B59B6</color>
+    <color name="dark_green">#28B463</color>
+    <color name="grey">#A6ACAF</color>
+    <color name="darker_grey">#7F8C8D</color>
+    <color name="darkest_blue">#34495E</color>
+    <color name="light_green">#58D68D</color>
 </resources>
