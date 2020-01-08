@@ -28,7 +28,8 @@
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
 
     </LinearLayout>
 
@@ -38,7 +39,11 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/drawer_menu"
+        android:background="@color/white"
+        app:itemIconTint="@color/item_icon_tint_light_theme"
+        app:itemTextColor="@color/item_text_color_light_theme"
+        app:itemBackground="@drawable/custom_nav_view_item_bg_light_theme"/>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

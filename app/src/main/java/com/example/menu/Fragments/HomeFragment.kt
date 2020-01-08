@@ -26,13 +26,21 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 import androidx.core.content.ContextCompat
 import android.R.string.cancel
+import android.widget.CompoundButton
+import android.widget.Switch
+import com.example.menu.R
+import com.example.menu.RealmClass.ItemModel
+import com.google.android.material.navigation.NavigationView
+import io.realm.Realm
+import io.realm.RealmConfiguration
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.list_item.*
 import java.util.*
 
 
 // all about Home Fragment
 class HomeFragment : Fragment(),
     TypeDataAdapter.RecyclerViewItemClickListener {  // responsible for handling click on every item on recycler view
-
 
     var customDialog: CustomListViewDialog? = null  // this is the Choose Type dialog
     var customFillUpDialog: FillUpDialog? = null  // this is the Fill Up dialog
@@ -46,6 +54,7 @@ class HomeFragment : Fragment(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "On Create")
+        Realm.init(activity!!)
         super.onCreate(savedInstanceState)
     }
 
@@ -70,8 +79,7 @@ class HomeFragment : Fragment(),
         onFABClick()  // instantiates the floating action button
         setupRecyclerView()  // instantiates the recycler viewer
         displayProgressBar()
-
-
+        setTheme()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -222,10 +230,45 @@ class HomeFragment : Fragment(),
         }
 
         progressBar.progressDrawable = draw
-
-
-
     }
 
 
+    fun setTheme() {
+        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+        val themeRealm = Realm.getInstance(themeConfig)
+        var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+        if (themeMode!!.itemType == "Dark Mode") {
+            // home background color
+            fragment_home_layout.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_two))
+
+            // progress card view
+            progressCardView.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_three))
+            tv_fund.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
+            tv_fund_value.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
+            divider.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.white))
+            tv_expenses.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
+            tv_expenses_value.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
+            dividerTwo.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.white))
+            tv_balance.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
+            tv_balance_value.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
+        } else {
+            // home background color
+            fragment_home_layout.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.white))
+
+            // progress card view
+            progressCardView.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.light_white))
+            tv_fund.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
+            tv_fund_value.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
+            divider.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
+            tv_expenses.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
+            tv_expenses_value.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
+            dividerTwo.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
+            tv_balance.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
+            tv_balance_value.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
+        }
+
+    }
+
 }
+
+

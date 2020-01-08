@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menu.Adapter.ExpendituresAdapter
@@ -31,6 +32,10 @@ class TrashFragment : Fragment() {
     var config = RealmConfiguration.Builder().name("removedItems.realm").build()
     var realm = Realm.getInstance(config)
     val TAG = "Trash Fragment"
+    val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+    val themeRealm = Realm.getInstance(themeConfig)
+    var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+
     override fun onAttach(context: Context) {
         Log.d(TAG, "On Attach")
         super.onAttach(context)
@@ -38,6 +43,7 @@ class TrashFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG, "On Create")
+        Realm.init(activity!!)
         super.onCreate(savedInstanceState)
     }
 
@@ -50,6 +56,7 @@ class TrashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         onDeleteAllFABClick()
         setupRecyclerView()
+        setTheme()
 
     }
 
@@ -133,6 +140,14 @@ class TrashFragment : Fragment() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    private fun setTheme() {
+        if (themeMode!!.itemType == "Dark Mode"){
+            fragment_trash_relative_layout.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_two))
+        }
+    }
+
+
 
 
 

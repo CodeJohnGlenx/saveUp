@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_options_dialog_id"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,20 +9,18 @@
     android:orientation="vertical"
     android:padding="5dp"
     android:background="@color/white">
-
-
     <Button
         android:id="@+id/btnView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/view_button_state"
+        android:background="@drawable/view_button_dark_state"
         android:drawableStart="@drawable/ic_view"
-        android:drawableTint="@drawable/view_button_state"
+        android:drawableTint="@drawable/view_button_dark_state"
         android:gravity="center_vertical"
         android:text=" View"
         android:textAllCaps="false"
-        android:textColor="@drawable/view_button_state"
+        android:textColor="@drawable/view_button_dark_state"
         android:textSize="22sp" />
 
     <Button
@@ -29,13 +28,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:background="@drawable/edit_button_state"
+        android:background="@drawable/edit_button_dark_state"
         android:drawableLeft="@drawable/ic_edit"
-        android:drawableTint="@drawable/edit_button_state"
+        android:drawableTint="@drawable/edit_button_dark_state"
         android:gravity="center_vertical"
         android:text=" Edit"
         android:textAllCaps="false"
-        android:textColor="@drawable/edit_button_state"
+        android:textColor="@drawable/edit_button_dark_state"
         android:textSize="22sp" />
 
     <Button
@@ -45,12 +44,12 @@
         android:layout_alignTop="@+id/btnEdit"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/remove_button_state"
+        android:background="@drawable/remove_button_dark_state"
         android:drawableLeft="@drawable/ic_trash"
-        android:drawableTint="@drawable/remove_button_state"
+        android:drawableTint="@drawable/remove_button_dark_state"
         android:gravity="center_vertical"
         android:text=" Remove"
         android:textAllCaps="false"
-        android:textColor="@drawable/remove_button_state"
+        android:textColor="@drawable/remove_button_dark_state"
         android:textSize="22sp" />
 </RelativeLayout>

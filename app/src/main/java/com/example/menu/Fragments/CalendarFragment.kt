@@ -27,6 +27,9 @@ import java.util.*
 
 // all about calendar fragment
 class CalendarFragment : Fragment() {
+    val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+    val themeRealm = Realm.getInstance(themeConfig)
+    var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
     var dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
 
     val config = RealmConfiguration.Builder().name("items.realm").build()
@@ -45,7 +48,11 @@ class CalendarFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "On Create View")
-        return inflater!!.inflate(R.layout.fragment_calendar, container,false)  // inflate the fragment_calendar on xml in this calendar_fragment
+        if (themeMode!!.itemType == "Dark Mode") {
+            return inflater!!.inflate(R.layout.fragment_dark_calendar, container,false)  // inflate the fragment_calendar on xml in this calendar_fragment
+        } else {
+            return inflater!!.inflate(R.layout.fragment_calendar, container,false)  // inflate the fragment_calendar on xml in this calendar_fragment
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

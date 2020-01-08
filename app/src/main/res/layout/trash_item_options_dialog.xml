@@ -44,13 +44,13 @@
         android:layout_alignTop="@+id/btnRestore"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/delete_button_state"
+        android:background="@drawable/remove_button_state"
         android:drawableLeft="@drawable/ic_delete_forever"
-        android:drawableTint="@drawable/delete_button_state"
+        android:drawableTint="@drawable/remove_button_state"
         android:gravity="center_vertical"
         android:text=" Delete"
         android:textAllCaps="false"
-        android:textColor="@drawable/delete_button_state"
+        android:textColor="@drawable/remove_button_state"
         android:textSize="22sp" />
 
 

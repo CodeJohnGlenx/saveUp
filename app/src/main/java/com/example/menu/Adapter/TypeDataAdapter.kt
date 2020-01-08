@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menu.R
+import com.example.menu.RealmClass.ItemModel
+import io.realm.Realm
+import io.realm.RealmConfiguration
+import kotlinx.android.synthetic.main.custom_dialog_layout.*
 import kotlinx.android.synthetic.main.type_list_item.view.*
 
 
@@ -50,11 +55,24 @@ internal var recyclerViewItemClickListener: RecyclerViewItemClickListener
 
 
     inner class TypeViewHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+        val themeRealm = Realm.getInstance(themeConfig)
+        var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
 
         var mTextView: TextView
         var mImageView: ImageView
 
         init {
+
+            // type dialog card view
+            if (themeMode!!.itemType == "Dark Mode") {
+                v.type_list_card.setCardBackgroundColor(ContextCompat.getColorStateList(v.context, R.color.list_card_state_dark_theme))
+                v.textView.setTextColor(ContextCompat.getColor(v.context, R.color.white))
+            } else {
+                v.type_list_card.setCardBackgroundColor(ContextCompat.getColorStateList(v.context, R.color.list_card_state_light_theme))
+                v.textView.setTextColor(ContextCompat.getColorStateList(v.context, R.color.list_card_text_state_light_theme))
+            }
+
             mTextView = v.textView
             mImageView = v.type_icon
             v.setOnClickListener(this)

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -43,6 +44,9 @@ class RemovedExpendituresAdapter(val context: Context, private val removedExpend
     var removedRealm = Realm.getInstance(removedConfig)
     var config = RealmConfiguration.Builder().name("items.realm").build()
     var realm = Realm.getInstance(config)
+    val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+    val themeRealm = Realm.getInstance(themeConfig)
+    var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view =
@@ -96,6 +100,14 @@ class RemovedExpendituresAdapter(val context: Context, private val removedExpend
             removedExpenditure?.let {
                 itemView.txvTitle.text = removedExpenditure.title
                 itemView.txvPrice.text = removedExpenditure.price.toString()
+
+                if (themeMode!!.itemType == "Dark Mode") {
+                    itemView.list_item_card.setCardBackgroundColor(ContextCompat.getColorStateList(context, com.example.menu.R.color.list_card_state_dark_theme))
+                    itemView.txvPrice.setTextColor(ContextCompat.getColor(context, android.R.color.white))
+                    itemView.txvTitle.setTextColor(ContextCompat.getColor(context, android.R.color.white))
+                }
+
+
 
                 when (removedExpenditure.type) {
                     "Beverages" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.beverages)
@@ -152,11 +164,36 @@ class RemovedExpendituresAdapter(val context: Context, private val removedExpend
         dialog.btn_done.setOnClickListener {
             dialog.dismiss()
         }
+
+
+        if (themeMode!!.itemType == "Dark Mode") {
+            dialog.item_view_dialog_scroll_view.setBackgroundColor(ContextCompat.getColor(context, com.example.menu.R.color.dark_grey_three))
+            dialog.item_view_dialog_relative_layout.setBackgroundColor(ContextCompat.getColor(context, com.example.menu.R.color.dark_grey_three))
+
+            dialog.tv_fill_up_type_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_view_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_view_date.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_date_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_view_time.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_time_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_value_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_monetary_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+        }
     }
 
     private fun showOptionsDialog(itemId: String) {
         var dialog = Dialog(context)
-        dialog.setContentView(com.example.menu.R.layout.trash_item_options_dialog)
+
+        if (themeMode!!.itemType == "Dark Mode") {
+            dialog.setContentView(R.layout.dark_trash_item_options_dialog)
+        } else {
+            dialog.setContentView(com.example.menu.R.layout.trash_item_options_dialog)
+        }
+
         dialog.setTitle("Options")
         dialog.setCancelable(true)
         dialog.show()

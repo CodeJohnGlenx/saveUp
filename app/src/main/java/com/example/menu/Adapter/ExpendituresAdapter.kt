@@ -21,10 +21,18 @@ import android.R
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.provider.ContactsContract
 import android.view.Window
 import android.widget.ImageView
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.NonNull
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getDrawable
+import androidx.core.graphics.drawable.DrawableCompat
 import com.example.menu.Data.DataClass.itemId
 import com.example.menu.MainActivity
 import com.example.menu.Model.RemovedExpenditure
@@ -53,6 +61,9 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
     var realm = Realm.getInstance(config)
     var removedConfig = RealmConfiguration.Builder().name("removedItems.realm").build()
     var removedRealm = Realm.getInstance(removedConfig)
+    val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+    val themeRealm = Realm.getInstance(themeConfig)
+    var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view =
@@ -108,8 +119,21 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
             var expense: Double? = 0.0
 
             expenditure?.let {
+                // list card theme
+                if (themeMode!!.itemType == "Dark Mode") {
+                    itemView.list_item_card.setCardBackgroundColor(ContextCompat.getColorStateList(context, com.example.menu.R.color.list_card_state_dark_theme))
+                    itemView.txvPrice.setTextColor(ContextCompat.getColor(context, R.color.white))
+                    itemView.txvTitle.setTextColor(ContextCompat.getColor(context, R.color.white))
+                } else {
+                    itemView.list_item_card.setCardBackgroundColor(ContextCompat.getColorStateList(context, com.example.menu.R.color.list_card_state_light_theme))
+                    itemView.txvPrice.setTextColor(ContextCompat.getColorStateList(context, com.example.menu.R.color.list_card_text_state_light_theme))
+                    itemView.txvTitle.setTextColor(ContextCompat.getColorStateList(context, com.example.menu.R.color.list_card_text_state_light_theme))
+                }
+
+
                 itemView.txvTitle.text = expenditure.title
                 itemView.txvPrice.text = expenditure.price.toString()
+
 
                 when (expenditure.type) {
                     "Beverages" ->  {
@@ -160,6 +184,18 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
     private fun showOptionsDialog(itemId: String) {
         var dialog = Dialog(context)
         dialog.setContentView(com.example.menu.R.layout.item_options_dialog)
+
+        // options dialog
+        if (themeMode!!.itemType == "Dark Mode") {
+            dialog.setContentView(com.example.menu.R.layout.item_options_dark_dialog)
+            dialog.item_options_dialog_id.setBackgroundColor(ContextCompat.getColor(context, com.example.menu.R.color.dark_grey_two))
+        } else {
+            dialog.setContentView(com.example.menu.R.layout.item_options_dialog)
+            dialog.item_options_dialog_id.setBackgroundColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+        }
+
+
         dialog.setTitle("Options")
         dialog.setCancelable(true)
         dialog.show()
@@ -215,6 +251,9 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
 
     // shows the item information when the item is clicked
     private fun showItemDialog(itemId: String) {
+        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+        val themeRealm = Realm.getInstance(themeConfig)
+        var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
         var dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
         var timeFormat = SimpleDateFormat("hh:mm a", Locale.US)
         var dialog = Dialog(context)
@@ -250,11 +289,35 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
         dialog.btn_done.setOnClickListener {
             dialog.dismiss()
         }
+
+        if (themeMode!!.itemType == "Dark Mode") {
+            dialog.item_view_dialog_scroll_view.setBackgroundColor(ContextCompat.getColor(context, com.example.menu.R.color.dark_grey_three))
+            dialog.item_view_dialog_relative_layout.setBackgroundColor(ContextCompat.getColor(context, com.example.menu.R.color.dark_grey_three))
+
+            dialog.tv_fill_up_type_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_view_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_view_date.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_date_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_view_time.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_time_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_value_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_monetary_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+        }
+
+
     }
 
 
     // shows edit dialog when edit button is clicked
     private fun showEditDialog(itemId: String) {
+        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+        val themeRealm = Realm.getInstance(themeConfig)
+        var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+
         var savedDate: Date? = null
         var savedTime: Date? = null
         var dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
@@ -268,7 +331,7 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
         // gets the current information of an item
         val getItem = realm.where(ItemModel::class.java).equalTo("itemId", "$itemId").findAll()
         getItem.forEach { item ->
-            dialog.tv_fill_up_type_title.text = item.itemType
+            dialog.tv_edit_fill_up_type_title.text = item.itemType
             dialog.et_edit_title.setText(item.itemTitle)
             dialog.et_edit_monetary_value.setText(item.itemValue.toString())
 
@@ -303,9 +366,20 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
 
         // set date button
         dialog.btn_edit_set_date.setOnClickListener {
+            val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+            val themeRealm = Realm.getInstance(themeConfig)
+            var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+            var theme: Int = 0
+
+            if (themeMode!!.itemType == "Dark Mode") {
+                theme = DatePickerDialog.THEME_DEVICE_DEFAULT_DARK
+            } else {
+                theme = DatePickerDialog.THEME_DEVICE_DEFAULT_LIGHT
+            }
+
             val selectedDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(
-                context,
+                context, theme,
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                     selectedDate.set(Calendar.YEAR, year)
                     selectedDate.set(Calendar.MONTH, month)
@@ -324,9 +398,19 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
 
         // set time button
         dialog.btn_edit_set_time.setOnClickListener {
+            val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+            val themeRealm = Realm.getInstance(themeConfig)
+            var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+            var theme: Int = 0
+
+            if (themeMode!!.itemType == "Dark Mode") {
+                theme = TimePickerDialog.THEME_DEVICE_DEFAULT_DARK
+            } else {
+                theme = TimePickerDialog.THEME_DEVICE_DEFAULT_LIGHT
+            }
             val selectedTime = Calendar.getInstance()
             val timePicker = TimePickerDialog(
-                context, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+                context, theme, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
                     selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
                     selectedTime.set(Calendar.MINUTE, minute)
                     val time = timeFormat.format(selectedTime.time)
@@ -350,7 +434,7 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
                                 .findAll()
                         editItem.forEach { item ->
                             realm.beginTransaction()
-                            item.itemType = dialog.tv_fill_up_type_title.text.toString()
+                            item.itemType = dialog.tv_edit_fill_up_type_title.text.toString()
                             item.itemTitle = dialog.et_edit_title.text.toString()
                             item.itemValue = dialog.et_edit_monetary_value.text.toString().toDouble()
                             item.itemDate = savedDate
@@ -378,6 +462,29 @@ class ExpendituresAdapter(val context: Context, private val expenditures: List<E
             } catch (exception: Exception) {
 
             }
+
+        }
+
+        if (themeMode!!.itemType == "Dark Mode") {
+            dialog.item_edit_dialog_scroll_view.setBackgroundColor(ContextCompat.getColor(context, com.example.menu.R.color.dark_grey_three))
+            dialog.item_edit_dialog_relative_layout.setBackgroundColor(ContextCompat.getColor(context, com.example.menu.R.color.dark_grey_three))
+
+            dialog.tv_edit_fill_up_type_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_edit_fill_up_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.et_edit_title.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.et_edit_title.setHintTextColor(ContextCompat.getColor(context, com.example.menu.R.color.grey))
+
+            dialog.tv_edit_date.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_edit_date_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_edit_time.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.tv_edit_time_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+
+            dialog.tv_edit_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.et_edit_monetary_value.setTextColor(ContextCompat.getColor(context, com.example.menu.R.color.white))
+            dialog.et_edit_monetary_value.setHintTextColor(ContextCompat.getColor(context, com.example.menu.R.color.grey))
+
 
         }
 

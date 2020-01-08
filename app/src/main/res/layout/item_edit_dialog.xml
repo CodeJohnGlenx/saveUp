@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_edit_dialog_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="5dp">
 
     <RelativeLayout
+        android:id="@+id/item_edit_dialog_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
@@ -20,7 +22,7 @@
 
 
         <TextView
-            android:id="@+id/tv_fill_up_type_title"
+            android:id="@+id/tv_edit_fill_up_type_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -33,7 +35,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_fill_up_title"
+            android:id="@+id/tv_edit_fill_up_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/iv_edit_item_type_icon"
@@ -45,7 +47,7 @@
             android:id="@+id/et_edit_title"
             android:layout_width="200dp"
             android:layout_height="45dp"
-            android:layout_alignTop="@id/tv_fill_up_title"
+            android:layout_alignTop="@id/tv_edit_fill_up_title"
             android:layout_marginTop="30dp"
             android:background="@drawable/fill_up_border"
             android:ems="10"
@@ -55,7 +57,7 @@
             android:padding="10dp" />
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_edit_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/et_edit_title"
@@ -67,7 +69,7 @@
             android:id="@+id/btn_edit_set_date"
             android:layout_width="120dp"
             android:layout_height="36dp"
-            android:layout_alignTop="@id/tv_date"
+            android:layout_alignTop="@id/tv_edit_date"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_green_button_state"
             android:text="Set Date"
@@ -79,7 +81,7 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/btn_edit_set_date"
-            android:layout_alignTop="@id/tv_date"
+            android:layout_alignTop="@id/tv_edit_date"
             android:layout_marginLeft="130dp"
             android:layout_marginTop="27dp"
             android:background="@drawable/fill_up_border"
@@ -89,7 +91,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_time"
+            android:id="@+id/tv_edit_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/btn_edit_set_date"
@@ -101,7 +103,7 @@
             android:id="@+id/btn_edit_set_time"
             android:layout_width="120dp"
             android:layout_height="36dp"
-            android:layout_alignTop="@id/tv_time"
+            android:layout_alignTop="@id/tv_edit_time"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_green_button_state"
             android:text="Set Time"
@@ -113,7 +115,7 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/btn_edit_set_time"
-            android:layout_alignTop="@id/tv_time"
+            android:layout_alignTop="@id/tv_edit_time"
             android:layout_marginLeft="130dp"
             android:layout_marginTop="27dp"
             android:background="@drawable/fill_up_border"
@@ -123,7 +125,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_value"
+            android:id="@+id/tv_edit_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/btn_edit_set_time"
@@ -135,7 +137,7 @@
             android:id="@+id/et_edit_monetary_value"
             android:layout_width="200dp"
             android:layout_height="45dp"
-            android:layout_alignTop="@id/tv_value"
+            android:layout_alignTop="@id/tv_edit_value"
             android:layout_marginTop="30dp"
             android:background="@drawable/fill_up_border"
             android:ems="10"

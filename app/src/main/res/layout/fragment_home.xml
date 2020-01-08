@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_home_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,6 +38,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="-30dp"
                 android:text="Asset"
+                android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
 
@@ -47,8 +49,8 @@
                 android:layout_alignTop="@id/progressBar"
                 android:layout_alignRight="@id/tv_fund"
                 android:layout_marginTop="30dp"
-                android:layout_marginRight="-55dp"
-                android:background="@color/light_grey" />
+                android:layout_marginRight="-45dp"
+                android:background="@color/dark_grey" />
 
             <TextView
                 android:id="@+id/tv_fund_value"
@@ -58,7 +60,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="-25dp"
                 android:text="1000.00"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/dark_grey"/>
 
             <TextView
                 android:id="@+id/tv_expenses"
@@ -67,7 +70,8 @@
                 android:layout_alignBottom="@+id/progressBar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="-30dp"
-                android:text="Expenses"
+                android:text="Expenditures"
+                android:textColor="@color/dark_grey"
                 android:layout_centerInParent="true"
                 android:textSize="18sp" />
 
@@ -78,8 +82,8 @@
                 android:layout_alignTop="@id/progressBar"
                 android:layout_alignRight="@id/tv_expenses"
                 android:layout_marginTop="30dp"
-                android:layout_marginRight="-30dp"
-                android:background="@color/light_grey" />
+                android:layout_marginRight="-20dp"
+                android:background="@color/dark_grey" />
 
             <TextView
                 android:id="@+id/tv_expenses_value"
@@ -89,6 +93,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="-25dp"
                 android:text="1000.00"
+                android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
             <TextView
@@ -100,6 +105,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="-30dp"
                 android:text="Balance"
+                android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
             <TextView
@@ -111,6 +117,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="-25dp"
                 android:text="1000.00"
+                android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
 

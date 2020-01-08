@@ -10,4 +10,5 @@ object DataClass {
     var selectedDate: Date? = Calendar.getInstance().time
     var expense: Double = 0.0
     var balance: Double = 0.0
+
 }

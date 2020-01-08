@@ -3,9 +3,11 @@ package com.example.menu.Dialogs
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.Window
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.menu.Data.DataClass
 import com.example.menu.Fragments.HomeFragment
@@ -61,6 +63,7 @@ class FillUpDialog(var fragmentActivity: FragmentActivity) : Dialog(fragmentActi
         getTimeNow()
         setTimeButton()
         addInfo(realm)
+        setUpTheme()
 
 
     }
@@ -83,10 +86,21 @@ class FillUpDialog(var fragmentActivity: FragmentActivity) : Dialog(fragmentActi
     }
 
     private fun setDateButton() {  // users can set their own date
+        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+        val themeRealm = Realm.getInstance(themeConfig)
+        var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+        var theme: Int = 0
+
+        if (themeMode!!.itemType == "Dark Mode") {
+            theme = DatePickerDialog.THEME_DEVICE_DEFAULT_DARK
+        } else {
+            theme = DatePickerDialog.THEME_DEVICE_DEFAULT_LIGHT
+        }
+
         btn_set_date.setOnClickListener {
             val selectedDate = Calendar.getInstance()
             val datePicker = DatePickerDialog(
-                fragmentActivity,
+                fragmentActivity, theme,
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                     selectedDate.set(Calendar.YEAR, year)
                     selectedDate.set(Calendar.MONTH, month)
@@ -100,6 +114,7 @@ class FillUpDialog(var fragmentActivity: FragmentActivity) : Dialog(fragmentActi
                 selectedDate.get(Calendar.DAY_OF_MONTH)
             )
             datePicker.show()
+
         }
     }
 
@@ -113,10 +128,22 @@ class FillUpDialog(var fragmentActivity: FragmentActivity) : Dialog(fragmentActi
     }
 
     private fun setTimeButton() {  // users can set their own time
+        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+        val themeRealm = Realm.getInstance(themeConfig)
+        var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+        var theme: Int = 0
+
+        if (themeMode!!.itemType == "Dark Mode") {
+            theme = TimePickerDialog.THEME_DEVICE_DEFAULT_DARK
+        } else {
+            theme = TimePickerDialog.THEME_DEVICE_DEFAULT_LIGHT
+        }
+
+
         btn_set_time.setOnClickListener {
             val selectedTime = Calendar.getInstance()
             val timePicker = TimePickerDialog(
-                fragmentActivity, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+                fragmentActivity, theme, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
                     selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
                     selectedTime.set(Calendar.MINUTE, minute)
                     val time = timeFormat.format(selectedTime.time)
@@ -174,7 +201,6 @@ class FillUpDialog(var fragmentActivity: FragmentActivity) : Dialog(fragmentActi
                         realm.commitTransaction()
 
                         Supplier.expenditures.clear()  // clearing the Supplier.expenditures(mutablelist) so we won't show replication of data on our recyclerview on HomeFragment
-
                         // responsible for adding all info from our database into Supplier.expenditures
                         val allItems = realm.where(ItemModel::class.java).findAll()
                         allItems.forEach { thisItem ->
@@ -206,5 +232,32 @@ class FillUpDialog(var fragmentActivity: FragmentActivity) : Dialog(fragmentActi
         transaction.replace(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    private fun setUpTheme() {
+        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+        val themeRealm = Realm.getInstance(themeConfig)
+        var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+
+        if (themeMode!!.itemType == "Dark Mode") {
+            fill_up_dialog_scroll_view.setBackgroundColor(ContextCompat.getColor(context, R.color.dark_grey_three))
+            fill_up_dialog_relative_layout.setBackgroundColor(ContextCompat.getColor(context, R.color.dark_grey_three))
+
+            tv_fill_up_type_title.setTextColor(ContextCompat.getColor(context, R.color.white))
+            tv_fill_up_title.setTextColor(ContextCompat.getColor(context, R.color.white))
+
+            et_title.setTextColor(ContextCompat.getColor(context, R.color.white))
+            et_title.setHintTextColor(ContextCompat.getColor(context, R.color.grey))
+
+            tv_date.setTextColor(ContextCompat.getColor(context, R.color.white))
+            tv_date_value.setTextColor(ContextCompat.getColor(context, R.color.white))
+
+            tv_time.setTextColor(ContextCompat.getColor(context, R.color.white))
+            tv_time_value.setTextColor(ContextCompat.getColor(context, R.color.white))
+
+            tv_value.setTextColor(ContextCompat.getColor(context, R.color.white))
+            et_monetary_value.setHintTextColor(ContextCompat.getColor(context, R.color.grey))
+            et_monetary_value.setTextColor(ContextCompat.getColor(context, R.color.white))
+        }
     }
 }
