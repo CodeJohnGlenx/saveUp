@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scroll_view_settings_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_settings_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_dark_mode_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_two_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/img_dark_mode_settings_fragment"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_theme"
+                    android:tint="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/tv_dark_mode_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_dark_mode_settings_fragment"
+                    android:text="Dark Mode"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/switch_dark_mode_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp" />
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view_dark_mode_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/card_view_dark_mode_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_automatically_delete_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/view_dark_mode_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_automatically_delete_data_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_automatically_delete_data_settings_fragment"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_automatically_delete"
+                    android:tint="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/tv_title_automatically_delete_data_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/img_automatically_delete_data_settings_fragment"
+                    android:text="Automatically Delete Data"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_value_automatically_delete_data_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title_automatically_delete_data_settings_fragment"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@id/img_automatically_delete_data_settings_fragment"
+                    android:text="Over This Month"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/img_drop_down_up_automatically_delete_data_settings_fragment"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:tint="@color/dark_grey" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <View
+            android:id="@+id/view_automatically_delete_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/card_view_automatically_delete_data_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_delete_all_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/view_automatically_delete_data_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_delete_all_data_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/img_delete_all_data_settings_fragment"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_trash"
+                    android:tint="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/tv_delete_all_data_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_delete_all_data_settings_fragment"
+                    android:text="Delete All Data"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="18sp" />
+
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view_delete_all_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/card_view_delete_all_data_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+
+    </RelativeLayout>
+
+</ScrollView>

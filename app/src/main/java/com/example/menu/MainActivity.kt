@@ -16,10 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
 import com.example.menu.Data.DataClass
-import com.example.menu.Fragments.CalendarFragment
-import com.example.menu.Fragments.HomeFragment
-import com.example.menu.Fragments.StatisticsFragment
-import com.example.menu.Fragments.TrashFragment
+import com.example.menu.Fragments.*
 import com.example.menu.Model.Expenditure
 import com.example.menu.Model.Supplier
 import com.example.menu.RealmClass.ItemModel
@@ -79,7 +76,7 @@ class MainActivity : AppCompatActivity(),
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white))
-
+        changeThemeMode()
         setNavigationViewThemeMode()
     }
 
@@ -117,38 +114,18 @@ class MainActivity : AppCompatActivity(),
                 ShowStatisticsFragment()
             }
 
+            R.id.nav_settings -> {
+                this.setTitle("Settings")
+                drawer_layout!!.closeDrawer(GravityCompat.START)  // close drawer layout once item is selected
+                ShowSettingsFragment()
+            }
+
         }
         //drawer_layout!!.closeDrawer(GravityCompat.START)  // close drawer layout once item is selected
         return true
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {  // setting the menu bar
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
-        menuInflater.inflate(R.menu.drawer_menu, menu)
-
-        changeThemeMode()
-        
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {  // action when item on menu bar is selected
-        return when (item.itemId) {
-            R.id.menu_search -> {
-                Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
-                true
-            }
-            R.id.menu_add -> {
-                Toast.makeText(this, "Add", Toast.LENGTH_SHORT).show()
-                true
-            }
-            R.id.menu_settings -> {
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
-                true
-            } else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onBackPressed() {  // closing the drawer when back pressed is clicked
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -189,6 +166,15 @@ class MainActivity : AppCompatActivity(),
     fun ShowStatisticsFragment() {
         val transaction = manager.beginTransaction()
         val fragment = StatisticsFragment()
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    fun ShowSettingsFragment() {
+        val transaction = manager.beginTransaction()
+        val fragment = SettingsFragment()
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit)
         transaction.replace(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)

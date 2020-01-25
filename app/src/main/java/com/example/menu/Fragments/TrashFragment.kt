@@ -1,5 +1,6 @@
 package com.example.menu.Fragments
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ import com.example.menu.R
 import com.example.menu.RealmClass.ItemModel
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import kotlinx.android.synthetic.main.confirmation_dialog.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_trash.*
 import kotlinx.android.synthetic.main.fragment_trash.recyclerView
@@ -113,6 +115,7 @@ class TrashFragment : Fragment() {
     }
 
     fun onDeleteAllFABClick() {
+        /*
         floatingActionButtonDeleteAll.setOnClickListener {
             AlertDialog.Builder(context!!).setTitle("Confirmation")
                 ?.setMessage("Are you sure you want to delete all the items in this trash permanently?")
@@ -129,6 +132,44 @@ class TrashFragment : Fragment() {
                 ?.setNegativeButton("No", { dialog, which ->  })
                 ?.create()
                 ?.show()
+        }
+
+         */
+
+        floatingActionButtonDeleteAll.setOnClickListener {
+            var dialog = Dialog(activity!!)
+            dialog.setContentView(R.layout.confirmation_dialog)
+            dialog.setCancelable(true)
+            dialog.show()
+
+            dialog.tv_confirmation_no_confirmation_dialog.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(view: View?) {
+                    dialog.cancel()
+                }
+            })
+
+            dialog.tv_confirmation_yes_confirmation_dialog.setOnClickListener(object  : View.OnClickListener {
+                override fun onClick(view: View) {
+                    val allItems = realm.where(ItemModel::class.java).findAll()
+                    allItems.forEach { item ->
+                        realm.beginTransaction()
+                        item.deleteFromRealm()
+                        realm.commitTransaction()
+                        showTrashFragment()
+                    }
+                    Toast.makeText(activity!!, "All Items Deleted", Toast.LENGTH_SHORT).show()
+                    dialog.cancel()
+                }
+            })
+
+            if (themeMode!!.itemType == "Dark Mode") {
+                dialog.tv_confirmation_confirmation_dialog.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
+                dialog.relative_layout_confirmation_dialog.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_three))
+                dialog.tv_confirmation_text_confirmation_dialog.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
+                dialog.tv_confirmation_text_confirmation_dialog.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_three))
+                dialog.tv_confirmation_no_confirmation_dialog.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_three))
+                dialog.tv_confirmation_yes_confirmation_dialog.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_three))
+            }
         }
     }
 
