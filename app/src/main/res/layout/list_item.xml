@@ -1,46 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?><!-- alt + ctrl + L to organize xml code -->
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_item_card"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list_item_card"
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
-    card_view:cardCornerRadius="5dp"
-    android:elevation="8dp"
     android:clickable="true"
+    android:elevation="8dp"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    card_view:cardBackgroundColor="@color/list_card_state_light_theme">
+    card_view:cardBackgroundColor="@color/list_card_state_light_theme"
+    card_view:cardCornerRadius="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:baselineAligned="false"
         android:orientation="horizontal"
-        android:padding="3dp"
-        >
+        android:padding="3dp">
 
 
         <ImageView
             android:id="@+id/item_list_type_icon"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            />
+            android:layout_height="50dp" />
+
         <TextView
             android:id="@+id/txvTitle"
             android:layout_width="207dp"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="9dp"
             android:layout_weight="1"
             android:text="Title Title"
             android:textColor="@drawable/list_text_state"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txvPrice"

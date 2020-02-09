@@ -194,7 +194,7 @@ class FillUpDialog(var fragmentActivity: FragmentActivity) : Dialog(fragmentActi
                         // saves or adds the info on the realm database
                         val item = realm.createObject(ItemModel::class.java, uuid)
                         item.itemType = savedItemType
-                        item.itemTitle = savedItemTitle
+                        item.itemTitle = savedItemTitle!!.trim()
                         item.itemValue = df.format(savedItemValue).toDouble()
                         item.itemDate = savedDate
                         item.itemTime = savedTime

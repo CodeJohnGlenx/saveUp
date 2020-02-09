@@ -34,16 +34,25 @@ import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.list_item.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 // all about Home Fragment
 class HomeFragment : Fragment(),
     TypeDataAdapter.RecyclerViewItemClickListener {  // responsible for handling click on every item on recycler view
-
     var customDialog: CustomListViewDialog? = null  // this is the Choose Type dialog
     var customFillUpDialog: FillUpDialog? = null  // this is the Fill Up dialog
+    val itemConfig = RealmConfiguration.Builder().name("items.realm").build()
+    val itemRealm = Realm.getInstance(itemConfig)
+    var removedItemConfig = RealmConfiguration.Builder().name("removedItems.realm").build()
+    var removedItemRealm = Realm.getInstance(removedItemConfig)
+    val deleteDateSelectionConfig = RealmConfiguration.Builder().name("deleteDateSelection.realm").build()
+    val deleteDateSelectionRealm = Realm.getInstance(deleteDateSelectionConfig)
+    var deleteDateSelection = deleteDateSelectionRealm.where(ItemModel::class.java).equalTo("itemId", "deleteDateSelection").findFirst()
+
 
 
     val TAG = "Home Fragment"
@@ -267,6 +276,255 @@ class HomeFragment : Fragment(),
             tv_balance_value.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
         }
 
+    }
+
+    private fun setDeleteDateSelection() {
+        val todayDateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
+        val thisMonthDateFormat = SimpleDateFormat("MMM yyyy", Locale.US)
+        val thisWeekDateFormat = SimpleDateFormat("yyyy MMM W", Locale.US)
+        val thisTwoWeeksDateFormat = SimpleDateFormat("yyyy MMM W", Locale.US)
+        val thisYearDateFormat = SimpleDateFormat("yyyy", Locale.US)
+        val pickADateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
+        val thisSixMonthsDateFormat = SimpleDateFormat("MMM yyyy", Locale.US)
+        val thisThreeDaysDateFormat = SimpleDateFormat("D", Locale.US)
+        val thisThreeMonthsDateFormat = SimpleDateFormat("MMM yyyy", Locale.US)
+
+        when(deleteDateSelection!!.itemTitle) {
+            "over this day" -> {
+                val allItems = itemRealm.where(ItemModel::class.java).findAll()
+                allItems.forEach { thisItem ->
+                    if (todayDateFormat.format(Date()) != todayDateFormat.format(thisItem.itemDate!!.time)) {
+                        itemRealm.beginTransaction()
+                        thisItem.deleteFromRealm()
+                        itemRealm.commitTransaction()
+                    }
+
+                }
+
+                val allRemovedItems = removedItemRealm.where(ItemModel::class.java).findAll()
+                allRemovedItems.forEach { thisRemovedItem ->
+                    if (todayDateFormat.format(Date()) != todayDateFormat.format(thisRemovedItem.itemDate!!.time)) {
+                        removedItemRealm.beginTransaction()
+                        thisRemovedItem.deleteFromRealm()
+                        removedItemRealm.commitTransaction()
+                    }
+
+                }
+            }
+            "over three days" -> {
+                val yesterdayCalendar = Calendar.getInstance()
+                val dayBeforeYesterdayCalendar = Calendar.getInstance()
+
+                yesterdayCalendar.add(Calendar.DAY_OF_YEAR, -1)
+                dayBeforeYesterdayCalendar.add(Calendar.DAY_OF_YEAR, -2)
+
+                val yesterdayDate = yesterdayCalendar.time
+                val dayBeforeYesterdayDate = dayBeforeYesterdayCalendar.time
+
+                val allItems = itemRealm.where(ItemModel::class.java).findAll()
+                allItems.forEach { thisItem ->
+                    if((thisThreeDaysDateFormat.format(Date()) != thisThreeDaysDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisThreeDaysDateFormat.format(yesterdayDate.time) != thisThreeDaysDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisThreeDaysDateFormat.format(dayBeforeYesterdayDate.time) != thisThreeDaysDateFormat.format(thisItem.itemDate!!.time))) {
+
+                        itemRealm.beginTransaction()
+                        thisItem.deleteFromRealm()
+                        itemRealm.commitTransaction()
+                    }
+                }
+
+                val allRemovedItems = removedItemRealm.where(ItemModel::class.java).findAll()
+                allRemovedItems.forEach { thisRemovedItem ->
+                    if((thisThreeDaysDateFormat.format(Date()) != thisThreeDaysDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisThreeDaysDateFormat.format(yesterdayDate.time) != thisThreeDaysDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisThreeDaysDateFormat.format(dayBeforeYesterdayDate.time) != thisThreeDaysDateFormat.format(thisRemovedItem.itemDate!!.time))) {
+
+                        removedItemRealm.beginTransaction()
+                        thisRemovedItem.deleteFromRealm()
+                        removedItemRealm.commitTransaction()
+                    }
+
+                }
+
+            }
+            "over this week" -> {
+                val allItems = itemRealm.where(ItemModel::class.java).findAll()
+                allItems.forEach { thisItem ->
+                    if (thisWeekDateFormat.format(Date()) != thisWeekDateFormat.format(thisItem.itemDate!!.time)) {
+                        itemRealm.beginTransaction()
+                        thisItem.deleteFromRealm()
+                        itemRealm.commitTransaction()
+                    }
+                }
+
+                val allRemovedItems = removedItemRealm.where(ItemModel::class.java).findAll()
+                allRemovedItems.forEach { thisRemovedItem ->
+                    if (thisWeekDateFormat.format(Date()) != thisWeekDateFormat.format(thisRemovedItem.itemDate!!.time)) {
+                        removedItemRealm.beginTransaction()
+                        thisRemovedItem.deleteFromRealm()
+                        removedItemRealm.commitTransaction()
+                    }
+                }
+            }
+            "over two weeks" -> {
+                val lastWeek = Calendar.getInstance()
+                lastWeek.add(Calendar.WEEK_OF_MONTH, -1)
+                val lastWeekDate = lastWeek.time
+
+                val allItems = itemRealm.where(ItemModel::class.java).findAll()
+                allItems.forEach { thisItem ->
+                    if ((thisTwoWeeksDateFormat.format(Date()) != thisTwoWeeksDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisTwoWeeksDateFormat.format(lastWeekDate.time) != thisTwoWeeksDateFormat.format(thisItem.itemDate!!.time))) {
+                        itemRealm.beginTransaction()
+                        thisItem.deleteFromRealm()
+                        itemRealm.commitTransaction()
+                    }
+                }
+
+                val allRemovedItems = removedItemRealm.where(ItemModel::class.java).findAll()
+                allRemovedItems.forEach { thisRemovedItem ->
+                    if ((thisTwoWeeksDateFormat.format(Date()) != thisTwoWeeksDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisTwoWeeksDateFormat.format(lastWeekDate.time) != thisTwoWeeksDateFormat.format(thisRemovedItem.itemDate!!.time))) {
+                        removedItemRealm.beginTransaction()
+                        thisRemovedItem.deleteFromRealm()
+                        removedItemRealm.commitTransaction()
+                    }
+                }
+
+
+            }
+            "over this month" -> {
+                val allItems = itemRealm.where(ItemModel::class.java).findAll()
+                allItems.forEach { thisItem ->
+                    if (thisMonthDateFormat.format(Date()) != thisMonthDateFormat.format(thisItem.itemDate!!.time)) {
+                        itemRealm.beginTransaction()
+                        thisItem.deleteFromRealm()
+                        itemRealm.commitTransaction()
+                    }
+                }
+
+                val allRemovedItems = removedItemRealm.where(ItemModel::class.java).findAll()
+                allRemovedItems.forEach { thisRemovedItem ->
+                    if (thisMonthDateFormat.format(Date()) != thisMonthDateFormat.format(thisRemovedItem.itemDate!!.time)) {
+                        removedItemRealm.beginTransaction()
+                        thisRemovedItem.deleteFromRealm()
+                        removedItemRealm.commitTransaction()
+                    }
+                }
+            }
+            "over three months" -> {
+                val onePreviousMonthCalendar = Calendar.getInstance()
+                val twoPreviousMonthCalendar = Calendar.getInstance()
+
+                onePreviousMonthCalendar.add(Calendar.MONTH, -1)
+                twoPreviousMonthCalendar.add(Calendar.MONTH, -2)
+
+                val onePreviousMonthDate = onePreviousMonthCalendar.time
+                val twoPreviousMonthDate = twoPreviousMonthCalendar.time
+
+                val allItems = itemRealm.where(ItemModel::class.java).findAll()
+                allItems.forEach { thisItem ->
+                    if ((thisThreeMonthsDateFormat.format(Date()) != thisThreeMonthsDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisThreeMonthsDateFormat.format(onePreviousMonthDate.time) != thisThreeMonthsDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisThreeMonthsDateFormat.format(twoPreviousMonthDate.time) != thisThreeMonthsDateFormat.format(thisItem.itemDate!!.time))) {
+
+                        itemRealm.beginTransaction()
+                        thisItem.deleteFromRealm()
+                        itemRealm.commitTransaction()
+
+                    }
+                }
+
+                val allRemovedItems = removedItemRealm.where(ItemModel::class.java).findAll()
+                allRemovedItems.forEach { thisRemovedItem ->
+                    if ((thisThreeMonthsDateFormat.format(Date()) != thisThreeMonthsDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisThreeMonthsDateFormat.format(onePreviousMonthDate.time) != thisThreeMonthsDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisThreeMonthsDateFormat.format(twoPreviousMonthDate.time) != thisThreeMonthsDateFormat.format(thisRemovedItem.itemDate!!.time))) {
+
+                        removedItemRealm.beginTransaction()
+                        thisRemovedItem.deleteFromRealm()
+                        removedItemRealm.commitTransaction()
+
+                    }
+                }
+
+
+            }
+            "over six months" -> {
+                val onePreviousMonthCalendar = Calendar.getInstance()
+                val twoPreviousMonthCalendar = Calendar.getInstance()
+                val threePreviousMonthCalendar = Calendar.getInstance()
+                val fourPreviousMonthCalendar = Calendar.getInstance()
+                val fivePreviousMonthCalendar = Calendar.getInstance()
+
+                onePreviousMonthCalendar.add(Calendar.MONTH, -1)
+                twoPreviousMonthCalendar.add(Calendar.MONTH, -2)
+                threePreviousMonthCalendar.add(Calendar.MONTH, -3)
+                fourPreviousMonthCalendar.add(Calendar.MONTH, -4)
+                fivePreviousMonthCalendar.add(Calendar.MONTH, -5)
+
+                val onePreviousMonthDate = onePreviousMonthCalendar.time
+                val twoPreviousMonthDate = twoPreviousMonthCalendar.time
+                val threePreviousMonthDate = threePreviousMonthCalendar.time
+                val fourPreviousMonthDate = fourPreviousMonthCalendar.time
+                val fivePreviousMonthDate = fivePreviousMonthCalendar.time
+
+                val allItems = itemRealm.where(ItemModel::class.java).findAll()
+                allItems.forEach { thisItem ->
+                    if ((thisSixMonthsDateFormat.format(Date()) != thisSixMonthsDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(onePreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(twoPreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(threePreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(fourPreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(fivePreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisItem.itemDate!!.time))) {
+
+                        itemRealm.beginTransaction()
+                        thisItem.deleteFromRealm()
+                        itemRealm.commitTransaction()
+
+                    }
+                }
+
+                val allRemovedItems = removedItemRealm.where(ItemModel::class.java).findAll()
+                allRemovedItems.forEach { thisRemovedItem ->
+                    if ((thisSixMonthsDateFormat.format(Date()) != thisSixMonthsDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(onePreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(twoPreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(threePreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(fourPreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisRemovedItem.itemDate!!.time)) &&
+                        (thisSixMonthsDateFormat.format(fivePreviousMonthDate.time) != thisSixMonthsDateFormat.format(thisRemovedItem.itemDate!!.time))) {
+
+                        removedItemRealm.beginTransaction()
+                        thisRemovedItem.deleteFromRealm()
+                        removedItemRealm.commitTransaction()
+
+                    }
+                }
+            }
+            "over this year" -> {
+                val allItems = itemRealm.where(ItemModel::class.java).findAll()
+                allItems.forEach { thisItem ->
+                    if (thisYearDateFormat.format(Date()) != thisYearDateFormat.format(thisItem.itemDate!!.time)) {
+                        itemRealm.beginTransaction()
+                        thisItem.deleteFromRealm()
+                        itemRealm.commitTransaction()
+                    }
+                }
+
+                val allRemovedItems = removedItemRealm.where(ItemModel::class.java).findAll()
+                allRemovedItems.forEach { thisRemovedItem ->
+                    if (thisYearDateFormat.format(Date()) != thisYearDateFormat.format(thisRemovedItem.itemDate!!.time)) {
+                        removedItemRealm.beginTransaction()
+                        thisRemovedItem.deleteFromRealm()
+                        removedItemRealm.commitTransaction()
+                    }
+                }
+            }
+            else -> {
+                // new year new me, bitch
+            }
+
+        }
     }
 
 }

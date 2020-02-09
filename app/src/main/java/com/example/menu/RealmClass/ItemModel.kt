@@ -9,6 +9,7 @@ import java.util.*
 // items.realm
 // removedItems.realm
 // themeMode.realm  // id: themeMode  // title/type: Light Mode or Dark Mode
+// deleteDateSelection.realm  // id: deleteDateSelection  // title/type: never(default)   // see SettingsSelectionAdapter for more info
 @RealmClass
 open class ItemModel() : RealmObject() {
     @PrimaryKey

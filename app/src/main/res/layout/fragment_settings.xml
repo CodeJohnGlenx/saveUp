@@ -2,6 +2,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/scroll_view_settings_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -54,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp" />
+                    android:layout_marginEnd="15dp" />
 
 
             </RelativeLayout>
@@ -71,10 +72,116 @@
             android:orientation="horizontal" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_automatically_delete_data_settings_fragment"
+            android:id="@+id/card_view_bookmark_settings_fragment"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/view_dark_mode_settings_fragment"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+
+            <RelativeLayout
+                android:id="@+id/relative_bookmark_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/img_bookmark_settings_fragment"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_bookmark"
+                    android:tint="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/tv_title_bookmark_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/img_bookmark_settings_fragment"
+                    android:text="Bookmark"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img_bookmark_drop_down_settings_fragment"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="11dp"
+                    android:clickable="true"
+                    android:src="@drawable/ic_arrow_drop_down"
+                    android:tint="@color/dark_grey" />
+
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settings_bookmark_items_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_view_bookmark_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:visibility="gone" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_add_bookmark_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/settings_bookmark_items_recycler_view"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="7dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/green_button_state"
+            app:cardCornerRadius="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_bookmark_add_settings_fragment"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="11dp"
+                    android:src="@drawable/ic_add"
+                    android:tint="@color/white" />
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view_bookmark_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/card_view_add_bookmark_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_automatically_delete_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/view_bookmark_settings_fragment"
             android:layout_marginTop="0dp"
             android:clickable="true"
             android:focusable="true"
@@ -114,7 +221,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="2dp"
                     android:layout_toEndOf="@id/img_automatically_delete_data_settings_fragment"
-                    android:text="Over This Month"
+                    android:text="never"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp" />
 
@@ -125,19 +232,26 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_arrow_drop_down"
                     android:tint="@color/dark_grey" />
 
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settings_selection_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_view_automatically_delete_data_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:visibility="gone" />
 
         <View
             android:id="@+id/view_automatically_delete_data_settings_fragment"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/card_view_automatically_delete_data_settings_fragment"
+            android:layout_below="@+id/settings_selection_recycler_view"
             android:layout_marginTop="0dp"
             android:background="@color/light_white_two"
             android:orientation="horizontal" />

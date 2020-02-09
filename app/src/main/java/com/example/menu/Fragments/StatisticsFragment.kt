@@ -132,6 +132,7 @@ class StatisticsFragment : Fragment() {
             "Today",
             "This Three Days",
             "This Week",
+            "This Two Weeks",
             "This Month",
             "This Three Months",
             "This Six Months",
@@ -681,6 +682,7 @@ class StatisticsFragment : Fragment() {
         val todayDateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
         val thisMonthDateFormat = SimpleDateFormat("MMM yyyy", Locale.US)
         val thisWeekDateFormat = SimpleDateFormat("yyyy MMM W", Locale.US)
+        val thisTwoWeeksDateFormat = SimpleDateFormat("yyyy MMM W", Locale.US)
         val thisYearDateFormat = SimpleDateFormat("yyyy", Locale.US)
         val pickADateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
         val thisSixMonthsDateFormat = SimpleDateFormat("MMM yyyy", Locale.US)
@@ -718,6 +720,20 @@ class StatisticsFragment : Fragment() {
                     }
                 }
             }
+
+            "This Two Weeks" -> {
+                val lastWeek = Calendar.getInstance()
+                lastWeek.add(Calendar.WEEK_OF_MONTH, -1)
+                val lastWeekDate = lastWeek.time
+
+                allItems.forEach { thisItem ->
+                    if ((thisTwoWeeksDateFormat.format(Date()) == thisTwoWeeksDateFormat.format(thisItem.itemDate!!.time)) ||
+                            thisTwoWeeksDateFormat.format(lastWeekDate.time) == thisTwoWeeksDateFormat.format(thisItem.itemDate!!.time)) {
+                        setWhenItemType(thisItem)
+                    }
+                }
+            }
+
             "This Three Days" -> {
                 // just initialization (will be used in if statement)
                 val yesterdayCalendar = Calendar.getInstance()
@@ -831,6 +847,9 @@ class StatisticsFragment : Fragment() {
         }
 
     }
+
+
+
 }
 
 class MyValueFormatter(private val xValsLabel: ArrayList<String>) : ValueFormatter() {

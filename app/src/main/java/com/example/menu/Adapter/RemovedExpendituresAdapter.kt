@@ -52,8 +52,6 @@ class RemovedExpendituresAdapter(val context: Context, private val removedExpend
         val view =
             LayoutInflater.from(context).inflate(com.example.menu.R.layout.list_item, parent, false)
         return MyViewHolder(view)
-
-
     }
 
     override fun getItemCount(): Int {

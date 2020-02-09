@@ -43,6 +43,28 @@ class MainActivity : AppCompatActivity(),
         Realm.init(this)
         val config = RealmConfiguration.Builder().name("items.realm").build()
         val realm = Realm.getInstance(config)
+        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+        val themeRealm = Realm.getInstance(themeConfig)
+        val deleteDateSelectionConfig = RealmConfiguration.Builder().name("deleteDateSelection.realm").build()
+        val deleteDateSelectionRealm = Realm.getInstance(deleteDateSelectionConfig)
+
+        var themeCheck = themeRealm.where(ItemModel::class.java).findFirst()
+        if (themeCheck == null) {
+            themeRealm.beginTransaction()
+            val theme = themeRealm.createObject(ItemModel::class.java, "themeMode")
+            theme.itemType = "Light Mode"
+            theme.itemTitle = "Light Mode"
+            themeRealm.commitTransaction()
+        }
+
+        var deleteDateSelectionCheck = deleteDateSelectionRealm.where(ItemModel::class.java).findFirst()
+        if (deleteDateSelectionCheck == null) {
+            deleteDateSelectionRealm.beginTransaction()
+            val deleteDateSelection = deleteDateSelectionRealm.createObject(ItemModel::class.java, "deleteDateSelection")
+            deleteDateSelection.itemType = "never"
+            deleteDateSelection.itemTitle = "never"
+            deleteDateSelectionRealm.commitTransaction()
+        }
 
         this.setTitle("Home")
 
@@ -125,8 +147,6 @@ class MainActivity : AppCompatActivity(),
         return true
 
     }
-
-
     override fun onBackPressed() {  // closing the drawer when back pressed is clicked
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
