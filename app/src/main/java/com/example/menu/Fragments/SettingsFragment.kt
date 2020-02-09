@@ -4,10 +4,7 @@ import android.app.*
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
-import android.os.Binder
-import android.os.Bundle
-import android.os.IBinder
-import android.os.SystemClock
+import android.os.*
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.util.Log
@@ -30,6 +27,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menu.Adapter.BookmarksAdapter
 import com.example.menu.Adapter.SettingsSelectionAdapter
+import com.example.menu.Adapter.TypeDataAdapter
+import com.example.menu.Data.DataClass
+import com.example.menu.Dialogs.BookmarkFillUpDialog
+import com.example.menu.Dialogs.CustomListViewDialog
+import com.example.menu.Dialogs.FillUpDialog
 import com.example.menu.MainActivity
 import com.example.menu.Model.BookmarkSupplier
 import com.example.menu.Model.SelectionSupplier
@@ -45,7 +47,9 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(), TypeDataAdapter.RecyclerViewItemClickListener {
+    var customDialog: CustomListViewDialog? = null  // this is the Choose Type dialog
+    var bookmarkCustomFillUpDialog: BookmarkFillUpDialog? = null  // this is the Fill Up dialog
     val TAG = "Settings Fragment"
     val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
     val themeRealm = Realm.getInstance(themeConfig)
@@ -122,6 +126,26 @@ class SettingsFragment : Fragment() {
     override fun onDetach() {
         Log.d(TAG, "On Detach")
         super.onDetach()
+    }
+
+    override fun clickOnItem(data: String) {
+        if (customDialog != null) {
+            //customDialog!!.dismiss()
+            Handler().postDelayed(
+                {
+                    customDialog!!.dismiss()
+                },
+                200
+            )  // delayed action to show the item being clicked
+
+            DataClass.typeTitle =
+                data  // setting the DataClass.typeTitle's value on the value(text) of the choose type item clicked
+
+            // responsible for showing the fill up dialog
+            bookmarkCustomFillUpDialog = BookmarkFillUpDialog(activity!!)
+            bookmarkCustomFillUpDialog!!.show()
+        }
+
     }
 
     private fun setUpRecyclerView() {
@@ -473,6 +497,29 @@ class SettingsFragment : Fragment() {
             }
         })
 
+        card_view_add_bookmark_settings_fragment.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                val items = arrayOf(
+                    "Beverages",
+                    "Cash Deposit",
+                    "Fare",
+                    "Food",
+                    "Health",
+                    "Miscellaneous",
+                    "School Expenses",
+                    "Entertainment"
+
+                )
+
+
+                // responsible for setting up items on the custom dialog
+                val dataAdapter = TypeDataAdapter(items, this@SettingsFragment)
+                customDialog = CustomListViewDialog(activity!!, dataAdapter)
+                customDialog!!.show()
+                customDialog!!.setCanceledOnTouchOutside(true)
+            }
+        })
+
     }
 
     private fun setImageViewActions() {
@@ -727,5 +774,6 @@ class SettingsFragment : Fragment() {
 
         }
     }
+
 
 }
