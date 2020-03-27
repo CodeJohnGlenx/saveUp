@@ -1,7 +1,6 @@
 package com.example.menu.Fragments
 
 import android.app.*
-import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.os.*
@@ -13,36 +12,26 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import android.widget.RemoteViews
-import android.widget.Switch
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.menu.Adapter.BookmarksAdapter
 import com.example.menu.Adapter.SettingsSelectionAdapter
 import com.example.menu.Adapter.TypeDataAdapter
 import com.example.menu.Data.DataClass
 import com.example.menu.Dialogs.BookmarkFillUpDialog
 import com.example.menu.Dialogs.CustomListViewDialog
-import com.example.menu.Dialogs.FillUpDialog
 import com.example.menu.MainActivity
+import com.example.menu.Model.Bookmark
 import com.example.menu.Model.BookmarkSupplier
 import com.example.menu.Model.SelectionSupplier
-import com.example.menu.Model.SettingsAutomaticallyDeleteSelectionModel
 import com.example.menu.R
 import com.example.menu.RealmClass.ItemModel
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.confirmation_dialog.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,11 +43,7 @@ class SettingsFragment : Fragment(), TypeDataAdapter.RecyclerViewItemClickListen
     val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
     val themeRealm = Realm.getInstance(themeConfig)
     var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
-    lateinit var notificationManager : NotificationManager
-    lateinit var notificationChannel : NotificationChannel
     lateinit var builder : Notification.Builder
-    private val channelId = " com.example.menu.Fragments"
-    private val description = "Student Budgeting App"
     val itemConfig = RealmConfiguration.Builder().name("items.realm").build()
     val itemRealm = Realm.getInstance(itemConfig)
     var removedItemConfig = RealmConfiguration.Builder().name("removedItems.realm").build()
@@ -66,7 +51,8 @@ class SettingsFragment : Fragment(), TypeDataAdapter.RecyclerViewItemClickListen
     val deleteDateSelectionConfig = RealmConfiguration.Builder().name("deleteDateSelection.realm").build()
     val deleteDateSelectionRealm = Realm.getInstance(deleteDateSelectionConfig)
     var deleteDateSelection = deleteDateSelectionRealm.where(ItemModel::class.java).equalTo("itemId", "deleteDateSelection").findFirst()
-
+    val bookmarkItemsConfig = RealmConfiguration.Builder().name("bookmarkItemsRealm.realm").build()
+    val bookmarkItemsRealm = Realm.getInstance(bookmarkItemsConfig)
 
     override fun onAttach(context: Context) {
         Log.d(TAG, "On Attach")
@@ -90,6 +76,7 @@ class SettingsFragment : Fragment(), TypeDataAdapter.RecyclerViewItemClickListen
         setUpRecyclerView()
         setDeleteDateSelection()
         setImageViewActions()
+        setUpBookmarkItems()
     }
 
 
@@ -232,70 +219,11 @@ class SettingsFragment : Fragment(), TypeDataAdapter.RecyclerViewItemClickListen
 
     }
 
-    private fun showSettingsFragment() {
-        val transaction = (activity!! as AppCompatActivity).supportFragmentManager.beginTransaction()
-        val fragment = SettingsFragment()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
-
     private fun restartApp() {  // refreshes Main Activity
         val intent =
             Intent(activity!!, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         activity!!.startActivity(intent)
     }
-
-    /*
-    private fun showNotifications() {
-       notificationManager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        btn_notify.setOnClickListener {
-
-            builder = Notification.Builder(activity)
-                .setSmallIcon(R.drawable.ic_notifications)
-                .setContentTitle("Student Budgeting App")
-                .setContentText("Have you updated your expenditure?")
-
-            var contentIntent = PendingIntent.getActivity(activity!!, 0, Intent(activity!!, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
-
-            builder.setContentIntent(contentIntent)
-
-            notificationManager.notify(1234, builder.build())
-        }
-    }
-
-     */
-
-    /*
-    private fun getNotification(content: String) : Notification {
-        var builder = Notification.Builder(activity)
-        builder.setContentTitle("Student Budgeting App")
-        builder.setContentText("Have you track your expenses?")
-        builder.setSmallIcon(R.drawable.ic_notifications)
-
-        var contentIntent = PendingIntent.getActivity(activity!!, 0, Intent(activity!!, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
-        builder.setContentIntent(contentIntent)
-        return builder.build()
-    }
-
-    private fun scheduleNotification(notification : Notification, time : Int) {
-        var notificationIntent = Intent(activity, NotificationClass::class.java)
-        notificationIntent.putExtra(NOTIFICATION_ID, 1)
-        notificationIntent.putExtra(NOTIFICATION, notification)
-        var pendingIntent = PendingIntent.getBroadcast(activity, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        var futureMillis = SystemClock.elapsedRealtime() + time
-        var alarmManager = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME, futureMillis, pendingIntent)
-    }
-
-    private fun showNotifications() {
-        btn_notify.setOnClickListener {
-            scheduleNotification(getNotification("3 second delay"), 3000)
-        }
-    }
-
-     */
 
     private fun setCardViewActions() {
         card_view_dark_mode_settings_fragment.setOnTouchListener(object : View.OnTouchListener {
@@ -375,6 +303,13 @@ class SettingsFragment : Fragment(), TypeDataAdapter.RecyclerViewItemClickListen
                             removedItemRealm.beginTransaction()
                             removedItem.deleteFromRealm()
                             removedItemRealm.commitTransaction()
+                        }
+
+                        val allBookmarkItems = bookmarkItemsRealm.where(ItemModel::class.java).findAll()
+                        allBookmarkItems.forEach { bookmarkItem ->
+                            bookmarkItemsRealm.beginTransaction()
+                            bookmarkItem.deleteFromRealm()
+                            bookmarkItemsRealm.commitTransaction()
                         }
 
                         Toast.makeText(activity!!, "All Data Deleted", Toast.LENGTH_SHORT).show()
@@ -501,14 +436,19 @@ class SettingsFragment : Fragment(), TypeDataAdapter.RecyclerViewItemClickListen
             override fun onClick(view: View?) {
                 val items = arrayOf(
                     "Beverages",
+                    "Bills",
                     "Cash Deposit",
+                    "Cosmetics",
+                    "Entertainment",
                     "Fare",
+                    "Fitness",
                     "Food",
                     "Health",
+                    "Hygiene",
                     "Miscellaneous",
                     "School Expenses",
-                    "Entertainment"
-
+                    "Shopping",
+                    "Utilities"
                 )
 
 
@@ -767,11 +707,21 @@ class SettingsFragment : Fragment(), TypeDataAdapter.RecyclerViewItemClickListen
                         removedItemRealm.commitTransaction()
                     }
                 }
+
+
             }
             else -> {
                 // new year new me, bitch
             }
 
+        }
+    }
+
+    private fun setUpBookmarkItems() {
+        BookmarkSupplier.bookmarks.clear()
+        val allBookmarkItems = bookmarkItemsRealm.where(ItemModel::class.java).findAll()
+        allBookmarkItems.forEach { thisBookmarkItem ->
+            BookmarkSupplier.bookmarks.add(0, Bookmark(thisBookmarkItem.itemTitle!!, thisBookmarkItem.itemValue!!, thisBookmarkItem.itemId!!, thisBookmarkItem.itemType!!))
         }
     }
 

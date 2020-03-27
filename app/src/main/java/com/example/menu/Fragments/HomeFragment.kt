@@ -1,19 +1,12 @@
 package com.example.menu.Fragments
 
-import android.animation.ObjectAnimator
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import androidx.core.graphics.drawable.toDrawable
-
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.menu.Adapter.ExpendituresAdapter
@@ -23,19 +16,19 @@ import com.example.menu.Dialogs.CustomListViewDialog
 import com.example.menu.Dialogs.FillUpDialog
 import com.example.menu.Model.Supplier
 import kotlinx.android.synthetic.main.fragment_home.*
-
 import androidx.core.content.ContextCompat
-import android.R.string.cancel
-import android.widget.CompoundButton
-import android.widget.Switch
+import android.app.Dialog
+import android.view.Window
+import com.example.menu.Adapter.BookmarksDialogAdapter
+import com.example.menu.Data.DataClass.prettyCount
+import com.example.menu.Model.Bookmark
+import com.example.menu.Model.BookmarkSupplier
 import com.example.menu.R
 import com.example.menu.RealmClass.ItemModel
-import com.google.android.material.navigation.NavigationView
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.list_item.*
+import kotlinx.android.synthetic.main.bookmark_dialog.*
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,6 +45,12 @@ class HomeFragment : Fragment(),
     val deleteDateSelectionConfig = RealmConfiguration.Builder().name("deleteDateSelection.realm").build()
     val deleteDateSelectionRealm = Realm.getInstance(deleteDateSelectionConfig)
     var deleteDateSelection = deleteDateSelectionRealm.where(ItemModel::class.java).equalTo("itemId", "deleteDateSelection").findFirst()
+    val bookmarkItemsConfig = RealmConfiguration.Builder().name("bookmarkItemsRealm.realm").build()
+    val bookmarkItemsRealm = Realm.getInstance(bookmarkItemsConfig)
+    val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
+    val themeRealm = Realm.getInstance(themeConfig)
+    var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+    val df = DecimalFormat("#.##")
 
 
 
@@ -76,7 +75,7 @@ class HomeFragment : Fragment(),
 
 
         return inflater!!.inflate(
-            com.example.menu.R.layout.fragment_home,
+          R.layout.fragment_home,
             container,
             false
         )  // inflates the fragment_home in this home fragment
@@ -89,6 +88,9 @@ class HomeFragment : Fragment(),
         setupRecyclerView()  // instantiates the recycler viewer
         displayProgressBar()
         setTheme()
+        onBookmarkFABClick()
+        setUpBookmarkItems()
+        setDeleteDateSelection()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -133,6 +135,8 @@ class HomeFragment : Fragment(),
 
         val adapter = ExpendituresAdapter(context!!, Supplier.expenditures)
         recyclerView.adapter = adapter
+
+
     }
 
     override fun clickOnItem(data: String) {  // when item on custom dialog/ choose type dialog is clicked
@@ -158,14 +162,19 @@ class HomeFragment : Fragment(),
         floatingActionButton.setOnClickListener {
             val items = arrayOf(
                 "Beverages",
+                "Bills",
                 "Cash Deposit",
+                "Cosmetics",
+                "Entertainment",
                 "Fare",
+                "Fitness",
                 "Food",
                 "Health",
+                "Hygiene",
                 "Miscellaneous",
                 "School Expenses",
-                "Entertainment"
-
+                "Shopping",
+                "Utilities"
             )
 
 
@@ -176,6 +185,26 @@ class HomeFragment : Fragment(),
             customDialog!!.setCanceledOnTouchOutside(true)
 
 
+        }
+    }
+
+    fun onBookmarkFABClick() {
+        floatingActionButtonBookmark.setOnClickListener {
+            val dialog = Dialog(activity!!)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.bookmark_dialog)
+
+            val bookmarkLayoutManager = LinearLayoutManager(activity!!)
+            bookmarkLayoutManager.orientation =  LinearLayoutManager.VERTICAL
+            dialog.bookmark_dialog_recycler_view.layoutManager = bookmarkLayoutManager
+            val bookmarkAdapter = BookmarksDialogAdapter(activity!!, BookmarkSupplier.bookmarks)
+            dialog.bookmark_dialog_recycler_view.adapter = bookmarkAdapter
+
+            dialog.setCancelable(true)
+            if (themeMode!!.itemType == "Dark Mode") {
+                dialog.bookmark_dialog_bookmark_dialog.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_two))
+            }
+            dialog.show()
         }
     }
 
@@ -202,9 +231,15 @@ class HomeFragment : Fragment(),
         }
         balanceValue = fundValue - expensesValue
 
-        tv_fund_value.text = fundValue.toString()
-        tv_expenses_value.text = expensesValue.toString()
-        tv_balance_value.text = balanceValue.toString()
+        tv_fund_value.text =  prettyCount(fundValue)            //df.format(fundValue).toString()
+        tv_expenses_value.text =  prettyCount(expensesValue)  //df.format(expensesValue).toString()
+
+        if (balanceValue < 0) {
+            tv_balance_value.text = "-" + prettyCount(Math.abs(balanceValue))
+        } else {
+            tv_balance_value.text = prettyCount(balanceValue)  //df.format(balanceValue).toString()
+        }
+
 
         Log.e(TAG, "$expenses")
         Log.e(TAG, "$balances")
@@ -214,38 +249,34 @@ class HomeFragment : Fragment(),
         if (progressBar.progress >= 50) {
             draw = ContextCompat.getDrawable(
                 context!!,
-                com.example.menu.R.drawable.custom_progress_bar_green
+                R.drawable.custom_progress_bar_green
             )
         } else if (progressBar.progress >= 35) {
             draw = ContextCompat.getDrawable(
                 context!!,
-                com.example.menu.R.drawable.custom_progress_bar_yellow
+                R.drawable.custom_progress_bar_yellow
             )
         } else if (progressBar.progress >= 20) {
             draw = ContextCompat.getDrawable(
                 context!!,
-                com.example.menu.R.drawable.custom_progress_bar_orange
+               R.drawable.custom_progress_bar_orange
             )
         } else if (fundValue == 0.0 && balanceValue == 0.0 && expensesValue == 0.0) {
             draw = ContextCompat.getDrawable(
                 context!!,
-                com.example.menu.R.drawable.custom_progress_bar_light_grey
+               R.drawable.custom_progress_bar_light_grey
             )
         } else {
             draw = ContextCompat.getDrawable(
                 context!!,
-                com.example.menu.R.drawable.custom_progress_bar_red
+                R.drawable.custom_progress_bar_red
             )
         }
 
         progressBar.progressDrawable = draw
     }
 
-
-    fun setTheme() {
-        val themeConfig = RealmConfiguration.Builder().name("themeMode.realm").build()
-        val themeRealm = Realm.getInstance(themeConfig)
-        var themeMode = themeRealm.where(ItemModel::class.java).equalTo("itemId", "themeMode").findFirst()
+    private fun setTheme() {
         if (themeMode!!.itemType == "Dark Mode") {
             // home background color
             fragment_home_layout.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_two))
@@ -254,28 +285,22 @@ class HomeFragment : Fragment(),
             progressCardView.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_three))
             tv_fund.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
             tv_fund_value.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
-            divider.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.white))
             tv_expenses.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
             tv_expenses_value.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
-            dividerTwo.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.white))
             tv_balance.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
             tv_balance_value.setTextColor(ContextCompat.getColor(activity!!, R.color.white))
         } else {
             // home background color
             fragment_home_layout.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.white))
-
             // progress card view
             progressCardView.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.light_white))
             tv_fund.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
             tv_fund_value.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
-            divider.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
             tv_expenses.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
             tv_expenses_value.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
-            dividerTwo.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
             tv_balance.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
             tv_balance_value.setTextColor(ContextCompat.getColor(activity!!, R.color.dark_grey))
         }
-
     }
 
     private fun setDeleteDateSelection() {
@@ -524,6 +549,14 @@ class HomeFragment : Fragment(),
                 // new year new me, bitch
             }
 
+        }
+    }
+
+    private fun setUpBookmarkItems() {
+        BookmarkSupplier.bookmarks.clear()
+        val allBookmarkItems = bookmarkItemsRealm.where(ItemModel::class.java).findAll()
+        allBookmarkItems.forEach { thisBookmarkItem ->
+            BookmarkSupplier.bookmarks.add(0, Bookmark(thisBookmarkItem.itemTitle!!, thisBookmarkItem.itemValue!!, thisBookmarkItem.itemId!!, thisBookmarkItem.itemType!!))
         }
     }
 

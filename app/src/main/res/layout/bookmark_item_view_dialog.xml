@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bookmark_item_view_dialog_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:id="@+id/bookmark_item_view_dialog_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+        <ImageView
+            android:id="@+id/bookmark_iv_item_view_dialog_type_icon"
+            android:layout_width="50sp"
+            android:layout_height="50sp" />
+
+
+        <TextView
+            android:id="@+id/bookmark_tv_item_view_dialog_fill_up_type_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="11dp"
+            android:layout_toEndOf="@+id/bookmark_iv_item_view_dialog_type_icon"
+            android:text="Text View"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bookmark_tv_view_title_item_view_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/bookmark_iv_item_view_dialog_type_icon"
+            android:layout_marginBottom="-30dp"
+            android:text="Title"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/bookmark_tv_title_item_view_dialog"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_alignTop="@id/bookmark_tv_view_title_item_view_dialog"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/fill_up_border"
+            android:inputType="text"
+            android:padding="10dp"
+            android:text="Hello World"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/bookmark_tv_value_value_item_view_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/bookmark_tv_title_item_view_dialog"
+            android:layout_marginTop="48dp"
+            android:text="Monetary Value"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/bookmark_tv_monetary_value_item_view_dialog"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_alignTop="@id/bookmark_tv_value_value_item_view_dialog"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/fill_up_border"
+            android:padding="10dp"
+            android:text="100"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/bookmark_btn_done_item_view_dialog"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_alignTop="@id/bookmark_tv_value_value_item_view_dialog"
+            android:layout_alignRight="@id/bookmark_tv_monetary_value_item_view_dialog"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="-60dp"
+            android:background="@mipmap/ic_done" />
+
+
+    </RelativeLayout>
+
+</ScrollView>

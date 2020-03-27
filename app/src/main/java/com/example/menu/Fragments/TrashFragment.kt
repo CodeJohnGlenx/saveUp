@@ -8,23 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.menu.Adapter.ExpendituresAdapter
 import com.example.menu.Adapter.RemovedExpendituresAdapter
-import com.example.menu.Model.Expenditure
 import com.example.menu.Model.RemovedExpenditure
 import com.example.menu.Model.RemovedSupplier
-import com.example.menu.Model.Supplier
 import com.example.menu.R
 import com.example.menu.RealmClass.ItemModel
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.android.synthetic.main.confirmation_dialog.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_trash.*
 import kotlinx.android.synthetic.main.fragment_trash.recyclerView
 
@@ -51,7 +46,7 @@ class TrashFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "On Create View")
-        return inflater!!.inflate(R.layout.fragment_trash, container,false)  // inflate the fragment_trash on xml in this trash_fragment
+        return inflater.inflate(R.layout.fragment_trash, container,false)  // inflate the fragment_trash on xml in this trash_fragment
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,8 +92,6 @@ class TrashFragment : Fragment() {
         super.onDetach()
     }
 
-
-
     private fun setupRecyclerView() {  // setting up the recycler viewer
         val layoutManager = LinearLayoutManager(context!!)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -114,30 +107,10 @@ class TrashFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
-    fun onDeleteAllFABClick() {
-        /*
-        floatingActionButtonDeleteAll.setOnClickListener {
-            AlertDialog.Builder(context!!).setTitle("Confirmation")
-                ?.setMessage("Are you sure you want to delete all the items in this trash permanently?")
-                ?.setPositiveButton("Yes", { dialog, which ->
-                    val allItems = realm.where(ItemModel::class.java).findAll()
-                    allItems.forEach { item ->
-                        realm.beginTransaction()
-                        item.deleteFromRealm()
-                        realm.commitTransaction()
-                        showTrashFragment()
-                    }
-                    Toast.makeText(context, "All Items Deleted", Toast.LENGTH_SHORT).show()
-                })
-                ?.setNegativeButton("No", { dialog, which ->  })
-                ?.create()
-                ?.show()
-        }
-
-         */
+    private fun onDeleteAllFABClick() {
 
         floatingActionButtonDeleteAll.setOnClickListener {
-            var dialog = Dialog(activity!!)
+            val dialog = Dialog(activity!!)
             dialog.setContentView(R.layout.confirmation_dialog)
             dialog.setCancelable(true)
             dialog.show()
@@ -187,12 +160,5 @@ class TrashFragment : Fragment() {
             fragment_trash_relative_layout.setBackgroundColor(ContextCompat.getColor(activity!!, R.color.dark_grey_two))
         }
     }
-
-
-
-
-
-
-
 
 }

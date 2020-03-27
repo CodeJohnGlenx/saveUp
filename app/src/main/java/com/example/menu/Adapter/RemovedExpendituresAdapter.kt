@@ -97,7 +97,7 @@ class RemovedExpendituresAdapter(val context: Context, private val removedExpend
 
             removedExpenditure?.let {
                 itemView.txvTitle.text = removedExpenditure.title
-                itemView.txvPrice.text = removedExpenditure.price.toString()
+                itemView.txvPrice.text = DataClass.prettyCount(removedExpenditure.price)
 
                 if (themeMode!!.itemType == "Dark Mode") {
                     itemView.list_item_card.setCardBackgroundColor(ContextCompat.getColorStateList(context, com.example.menu.R.color.list_card_state_dark_theme))
@@ -108,15 +108,21 @@ class RemovedExpendituresAdapter(val context: Context, private val removedExpend
 
 
                 when (removedExpenditure.type) {
-                    "Beverages" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.beverages)
-                    "Cash Deposit" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.cash_deposit)
-                    "Fare" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.fare)
-                    "Food" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.food)
-                    "Health" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.health)
-                    "School Expenses" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.school_expenses)
-                    "Miscellaneous" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.miscellaneous)
-                    "Entertainment" -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.entertainment)
-                    else -> itemView.item_list_type_icon.setBackgroundResource(com.example.menu.R.drawable.sample_logo_1)
+                    "Beverages" -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.beverages)
+                    "Bills" -> itemView.item_list_type_icon.setImageResource(R.drawable.bills)
+                    "Cash Deposit" -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.cash_deposit)
+                    "Cosmetics" -> itemView.item_list_type_icon.setImageResource(R.drawable.cosmetics)
+                    "Entertainment" -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.entertainment)
+                    "Fare" -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.fare)
+                    "Fitness" -> itemView.item_list_type_icon.setImageResource(R.drawable.fitness)
+                    "Food" -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.food)
+                    "Health" -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.health)
+                    "Hygiene" -> itemView.item_list_type_icon.setImageResource(R.drawable.hygiene)
+                    "Miscellaneous" -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.miscellaneous)
+                    "School Expenses" -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.school_expenses)
+                    "Shopping" -> itemView.item_list_type_icon.setImageResource(R.drawable.shopping)
+                    "Utilities" -> itemView.item_list_type_icon.setImageResource(R.drawable.utilities)
+                    else -> itemView.item_list_type_icon.setImageResource(com.example.menu.R.drawable.sample_logo_1)
                 }
 
             }
@@ -145,15 +151,22 @@ class RemovedExpendituresAdapter(val context: Context, private val removedExpend
             dialog.tv_monetary_value.text = item.itemValue.toString()
 
             when (item.itemType.toString()) {
-                "Beverages" -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.beverages)
-                "Cash Deposit" -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.cash_deposit)
-                "Fare" -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.fare)
-                "Food" -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.food)
-                "Health" -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.health)
-                "School Expenses" -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.school_expenses)
-                "Miscellaneous" -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.miscellaneous)
-                "Entertainment" -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.entertainment)
-                else -> dialog.iv_item_view_type_icon.setBackgroundResource(com.example.menu.R.drawable.sample_logo_1)
+                "Beverages" -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.beverages)
+                "Bills" -> dialog.iv_item_view_type_icon.setImageResource(R.drawable.bills)
+                "Cash Deposit" -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.cash_deposit)
+                "Cosmetics" -> dialog.iv_item_view_type_icon.setImageResource(R.drawable.cosmetics)
+                "Entertainment" -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.entertainment)
+                "Fare" -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.fare)
+                "Fitness" -> dialog.iv_item_view_type_icon.setImageResource(R.drawable.fitness)
+                "Food" -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.food)
+                "Health" -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.health)
+                "Hygiene" -> dialog.iv_item_view_type_icon.setImageResource(R.drawable.hygiene)
+                "Miscellaneous" -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.miscellaneous)
+                "School Expenses" -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.school_expenses)
+                "Shopping" -> dialog.iv_item_view_type_icon.setImageResource(R.drawable.shopping)
+                "Utilities" -> dialog.iv_item_view_type_icon.setImageResource(R.drawable.utilities)
+
+                else -> dialog.iv_item_view_type_icon.setImageResource(com.example.menu.R.drawable.sample_logo_1)
             }
 
         }

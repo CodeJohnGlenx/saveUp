@@ -10,6 +10,7 @@ import java.util.*
 // removedItems.realm
 // themeMode.realm  // id: themeMode  // title/type: Light Mode or Dark Mode
 // deleteDateSelection.realm  // id: deleteDateSelection  // title/type: never(default)   // see SettingsSelectionAdapter for more info
+// bookmarkItemsRealm.realm  // id: (unique uuid)  // for bookmark items   // See settingsFragment
 @RealmClass
 open class ItemModel() : RealmObject() {
     @PrimaryKey

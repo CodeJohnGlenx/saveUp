@@ -162,15 +162,21 @@ class FillUpDialog(var fragmentActivity: FragmentActivity) : Dialog(fragmentActi
         savedItemType = DataClass.typeTitle!!.toString()
 
         when (DataClass.typeTitle!!.toString()) {
-            "Beverages" -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.beverages)
-            "Cash Deposit" -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.cash_deposit)
-            "Fare" -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.fare)
-            "Food" -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.food)
-            "Health" -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.health)
-            "School Expenses" -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.school_expenses)
-            "Miscellaneous" -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.miscellaneous)
-            "Entertainment" -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.entertainment)
-            else -> iv_fill_up_type_icon.setBackgroundResource(R.drawable.sample_logo_1)
+            "Beverages" -> iv_fill_up_type_icon.setImageResource(R.drawable.beverages)
+            "Bills" -> iv_fill_up_type_icon.setImageResource(R.drawable.bills)
+            "Cash Deposit" -> iv_fill_up_type_icon.setImageResource(R.drawable.cash_deposit)
+            "Cosmetics" -> iv_fill_up_type_icon.setImageResource(R.drawable.cosmetics)
+            "Entertainment" -> iv_fill_up_type_icon.setImageResource(R.drawable.entertainment)
+            "Fare" -> iv_fill_up_type_icon.setImageResource(R.drawable.fare)
+            "Fitness" -> iv_fill_up_type_icon.setImageResource(R.drawable.fitness)
+            "Food" -> iv_fill_up_type_icon.setImageResource(R.drawable.food)
+            "Health" -> iv_fill_up_type_icon.setImageResource(R.drawable.health)
+            "Hygiene" -> iv_fill_up_type_icon.setImageResource(R.drawable.hygiene)
+            "Miscellaneous" -> iv_fill_up_type_icon.setImageResource(R.drawable.miscellaneous)
+            "School Expenses" -> iv_fill_up_type_icon.setImageResource(R.drawable.school_expenses)
+            "Shopping" -> iv_fill_up_type_icon.setImageResource(R.drawable.shopping)
+            "Utilities" -> iv_fill_up_type_icon.setImageResource(R.drawable.utilities)
+            else -> iv_fill_up_type_icon.setImageResource(R.drawable.sample_logo_1)
         }
 
     }

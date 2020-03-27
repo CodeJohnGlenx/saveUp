@@ -35,15 +35,21 @@ internal var recyclerViewItemClickListener: RecyclerViewItemClickListener
     override fun onBindViewHolder(typeViewHolder: TypeViewHolder, i: Int) {
         typeViewHolder.mTextView.text = mDataset[i]
         when (mDataset[i]) {
-            "Beverages" -> typeViewHolder.mImageView.setBackgroundResource(R.drawable.beverages)
-            "Cash Deposit" -> typeViewHolder.mImageView.setBackgroundResource(R.drawable.cash_deposit)
-            "Fare" -> typeViewHolder.mImageView.setBackgroundResource(R.drawable.fare)
-            "Food" -> typeViewHolder.mImageView.setBackgroundResource(R.drawable.food)
-            "Health" -> typeViewHolder.mImageView.setBackgroundResource(R.drawable.health)
-            "School Expenses" -> typeViewHolder.mImageView.setBackgroundResource(R.drawable.school_expenses)
-            "Miscellaneous" ->  typeViewHolder.mImageView.setBackgroundResource(R.drawable.miscellaneous)
-            "Entertainment" -> typeViewHolder.mImageView.setBackgroundResource(R.drawable.entertainment)
-            else -> typeViewHolder.mImageView.setBackgroundResource(R.drawable.sample_logo_1)
+            "Beverages" -> typeViewHolder.mImageView.setImageResource(R.drawable.beverages)
+            "Bills" -> typeViewHolder.mImageView.setImageResource(R.drawable.bills)
+            "Cash Deposit" -> typeViewHolder.mImageView.setImageResource(R.drawable.cash_deposit)
+            "Cosmetics" -> typeViewHolder.mImageView.setImageResource(R.drawable.cosmetics)
+            "Entertainment" -> typeViewHolder.mImageView.setImageResource(R.drawable.entertainment)
+            "Fare" -> typeViewHolder.mImageView.setImageResource(R.drawable.fare)
+            "Fitness" -> typeViewHolder.mImageView.setImageResource(R.drawable.fitness)
+            "Food" -> typeViewHolder.mImageView.setImageResource(R.drawable.food)
+            "Health" -> typeViewHolder.mImageView.setImageResource(R.drawable.health)
+            "Hygiene" -> typeViewHolder.mImageView.setImageResource(R.drawable.hygiene)
+            "Miscellaneous" ->  typeViewHolder.mImageView.setImageResource(R.drawable.miscellaneous)
+            "School Expenses" -> typeViewHolder.mImageView.setImageResource(R.drawable.school_expenses)
+            "Shopping" -> typeViewHolder.mImageView.setImageResource(R.drawable.shopping)
+            "Utilities" -> typeViewHolder.mImageView.setImageResource(R.drawable.utilities)
+            else -> typeViewHolder.mImageView.setImageResource(R.drawable.sample_logo_1)
         }
 
 

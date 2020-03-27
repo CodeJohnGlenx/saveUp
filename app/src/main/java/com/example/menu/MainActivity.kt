@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)  // contains the navigation drawer and the fragment frame layout
         // setting realm on the home fragment when app is opened
+
+
         Realm.init(this)
         val config = RealmConfiguration.Builder().name("items.realm").build()
         val realm = Realm.getInstance(config)
@@ -47,6 +49,8 @@ class MainActivity : AppCompatActivity(),
         val themeRealm = Realm.getInstance(themeConfig)
         val deleteDateSelectionConfig = RealmConfiguration.Builder().name("deleteDateSelection.realm").build()
         val deleteDateSelectionRealm = Realm.getInstance(deleteDateSelectionConfig)
+        val bookmarkItemsConfig = RealmConfiguration.Builder().name("bookmarkItemsRealm.realm").build()
+        val bookmarkItemsRealm = Realm.getInstance(bookmarkItemsConfig)
 
         var themeCheck = themeRealm.where(ItemModel::class.java).findFirst()
         if (themeCheck == null) {
@@ -100,6 +104,16 @@ class MainActivity : AppCompatActivity(),
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white))
         changeThemeMode()
         setNavigationViewThemeMode()
+
+        /*
+        val allBookmarkItems = bookmarkItemsRealm.where(ItemModel::class.java).findAll()
+        allBookmarkItems.forEach { thisBookmarkItem ->
+            bookmarkItemsRealm.beginTransaction()
+            thisBookmarkItem.deleteFromRealm()
+            bookmarkItemsRealm.commitTransaction()
+        }
+
+         */
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {   // when navigation item is selected

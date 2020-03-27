@@ -31,6 +31,7 @@
             android:layout_marginBottom="11dp"
             android:layout_toEndOf="@+id/iv_fill_up_type_icon"
             android:text="Text View"
+            android:textColor="@color/dark_grey"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -41,6 +42,7 @@
             android:layout_alignBottom="@+id/iv_fill_up_type_icon"
             android:layout_marginBottom="-30dp"
             android:text="Title"
+            android:textColor="@color/dark_grey"
             android:textSize="18sp" />
 
         <EditText
@@ -53,6 +55,7 @@
             android:ems="10"
             android:textColor="@color/dark_grey"
             android:hint="Enter Title.."
+            android:textColorHint="@color/grey"
             android:inputType="text"
             android:padding="10dp" />
 
