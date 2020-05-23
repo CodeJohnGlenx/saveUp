@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_options_dialog_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="40dp"
+    android:background="@color/dark_grey_two">
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/view_button_dark_state"
+        android:drawableStart="@drawable/ic_view"
+        android:drawableTint="@drawable/view_button_dark_state"
+        android:tint="@drawable/view_button_dark_state"
+        android:gravity="center_vertical"
+        android:text="@string/view"
+        android:textAllCaps="false"
+        android:textColor="@drawable/view_button_dark_state"
+        android:textSize="30sp"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/btnView"
+        android:background="@drawable/edit_button_dark_state"
+        android:drawableStart="@drawable/ic_edit"
+        android:drawableTint="@drawable/edit_button_dark_state"
+        android:tint="@drawable/edit_button_dark_state"
+        android:gravity="center_vertical"
+        android:text="@string/edit"
+        android:textAllCaps="false"
+        android:textColor="@drawable/edit_button_dark_state"
+        android:textSize="30sp"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/btnRemove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnEdit"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/remove_button_dark_state"
+        android:drawableStart="@drawable/ic_trash"
+        android:drawableTint="@drawable/remove_button_dark_state"
+        android:tint="@drawable/remove_button_dark_state"
+        android:gravity="center_vertical"
+        android:text="@string/remove"
+        android:textAllCaps="false"
+        android:textColor="@drawable/remove_button_dark_state"
+        android:textSize="30sp"
+        android:padding="10dp"/>
+</RelativeLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_layout_confirmation_dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/tv_confirmation_confirmation_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/confirmation"
+        android:textColor="@color/dark_grey"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/tv_confirmation_text_confirmation_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_confirmation_confirmation_dialog"
+        android:layout_marginTop="20dp"
+        tools:text="Are you sure you want to delete all the items in trash permanently?"
+        android:textColor="@color/dark_grey"
+        android:textSize="26sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_confirmation_no_confirmation_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_confirmation_text_confirmation_dialog"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="35dp"
+        android:layout_toStartOf="@+id/tv_confirmation_yes_confirmation_dialog"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/confirmation_no"
+        android:layout_marginBottom="14dp"
+        android:textColor="@color/green"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/tv_confirmation_yes_confirmation_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_confirmation_text_confirmation_dialog"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/confirmation_yes"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="14dp"
+        android:textColor="@color/green"
+        android:textSize="26sp" />
+
+</RelativeLayout>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view_settings_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_settings_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_dark_mode_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_two_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/img_dark_mode_settings_fragment"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/ic_theme"
+                    android:tint="@color/dark_grey"
+                    android:contentDescription="@string/dark_mode_icon_desc"/>
+
+                <TextView
+                    android:id="@+id/tv_dark_mode_settings_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/img_dark_mode_settings_fragment"
+                    android:layout_toStartOf="@id/switch_dark_mode_settings_fragment"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/dark_mode_settings"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="26sp" />
+
+                <Switch
+                    android:id="@+id/switch_dark_mode_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"/>
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view_dark_mode_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/card_view_dark_mode_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_bookmark_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/view_dark_mode_settings_fragment"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+
+            <RelativeLayout
+                android:id="@+id/relative_bookmark_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/img_bookmark_settings_fragment"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/ic_bookmark"
+                    android:tint="@color/dark_grey"
+                    android:contentDescription="@string/bookmark_icon_desc"/>
+
+                <TextView
+                    android:id="@+id/tv_title_bookmark_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/img_bookmark_settings_fragment"
+                    android:layout_toStartOf="@id/img_bookmark_drop_down_settings_fragment"
+                    android:text="@string/bookmark_settings"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="26sp" />
+
+                <ImageView
+                    android:id="@+id/img_bookmark_drop_down_settings_fragment"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_arrow_drop_down"
+                    android:tint="@color/dark_grey"
+                    android:contentDescription="@string/drop_down_icon_desc"/>
+
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settings_bookmark_items_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_view_bookmark_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:visibility="gone" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_add_bookmark_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/settings_bookmark_items_recycler_view"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="7dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/green_button_state"
+            app:cardCornerRadius="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_bookmark_add_settings_fragment"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="11dp"
+                    android:src="@drawable/ic_add"
+                    android:tint="@color/white"
+                    android:contentDescription="@string/add_bookmark_icon_desc"/>
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view_bookmark_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/card_view_add_bookmark_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_include_items_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/view_bookmark_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_include_items_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_include_items_settings_fragment"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/ic_item"
+                    android:tint="@color/dark_grey"
+                    android:contentDescription="@string/include_items_icon_desc"/>
+
+                <TextView
+                    android:id="@+id/tv_title_include_items_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_toStartOf="@id/img_drop_down_up_include_items_settings_fragment"
+                    android:layout_toEndOf="@id/img_include_items_settings_fragment"
+                    android:text="@string/include_items_settings"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tv_value_include_items_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title_include_items_settings_fragment"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toStartOf="@id/img_drop_down_up_include_items_settings_fragment"
+                    android:layout_toEndOf="@id/img_include_items_settings_fragment"
+                    tools:text="all items"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img_drop_down_up_include_items_settings_fragment"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_arrow_drop_down"
+                    android:tint="@color/dark_grey"
+                    android:contentDescription="@string/drop_down_icon_desc"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settings_include_items_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_view_include_items_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/view_include_items_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/settings_include_items_recycler_view"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_automatically_delete_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/view_include_items_settings_fragment"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_automatically_delete_data_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_automatically_delete_data_settings_fragment"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/ic_automatically_delete"
+                    android:tint="@color/dark_grey"
+                    android:contentDescription="@string/automatically_delete_items_icon_desc"/>
+
+                <TextView
+                    android:id="@+id/tv_title_automatically_delete_data_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_toStartOf="@id/img_drop_down_up_automatically_delete_data_settings_fragment"
+                    android:layout_toEndOf="@id/img_automatically_delete_data_settings_fragment"
+                    android:text="@string/automatically_delete_items_settings"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="24sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_value_automatically_delete_data_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title_automatically_delete_data_settings_fragment"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toStartOf="@id/img_drop_down_up_automatically_delete_data_settings_fragment"
+                    android:layout_toEndOf="@id/img_automatically_delete_data_settings_fragment"
+                    tools:text="never"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img_drop_down_up_automatically_delete_data_settings_fragment"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_arrow_drop_down"
+                    android:tint="@color/dark_grey"
+                    android:contentDescription="@string/drop_down_icon_desc"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settings_selection_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_view_automatically_delete_data_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/view_automatically_delete_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/settings_selection_recycler_view"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_delete_all_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/view_automatically_delete_data_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+
+            app:cardBackgroundColor="@color/settings_card_view_light_mode_state">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_delete_all_data_settings_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/img_delete_all_data_settings_fragment"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:clickable="true"
+                    android:contentDescription="@string/delete_all_data_icon_desc"
+                    android:focusable="true"
+                    android:src="@drawable/ic_trash"
+                    android:tint="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/tv_delete_all_data_settings_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@+id/img_delete_all_data_settings_fragment"
+                    android:text="@string/delete_all_data_settings"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="26sp" />
+
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view_delete_all_data_settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/card_view_delete_all_data_settings_fragment"
+            android:layout_marginTop="0dp"
+            android:background="@color/light_white_two"
+            android:orientation="horizontal" />
+
+
+    </RelativeLayout>
+
+</ScrollView>

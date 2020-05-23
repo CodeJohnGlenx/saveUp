@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/selection_card_view"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardBackgroundColor="@color/settings_card_view_light_mode_state"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_settings_selection"
+            android:layout_width="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_height="60dp"
+            android:tint="@color/dark_grey"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_calendar"
+            android:contentDescription="@string/date_icon"/>
+
+        <TextView
+            android:id="@+id/tv_selection_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="This Freakin Day"
+            android:textSize="30sp"
+            android:layout_toEndOf="@id/img_settings_selection"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/dark_grey"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

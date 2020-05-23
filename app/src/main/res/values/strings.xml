@@ -1,5 +1,106 @@
 <resources>
-    <string name="app_name">Save!</string>
+    <string name="app_name">SaveUp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!-- Navigation Drawer -->
+    <string name="home">Home</string>
+    <string name="calendar">Calendar</string>
+    <string name="statistics">Statistics</string>
+    <string name="trash">Trash</string>
+    <string name="settings">Settings</string>
+    <string name="credits">Credits</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="light_mode">Light Mode</string>
+
+    <!-- Home Fragment -->
+    <string name="asset">Asset</string>
+    <string name="expenses">Expenses</string>
+    <string name="balance">Balance</string>
+    <string name="choose_bookmark">Choose Bookmark</string>
+    <string name="choose_type">Choose Type</string>
+
+    <!-- Types -->
+    <string name="beverages">Beverages</string>
+    <string name="bills">Bills</string>
+    <string name="income">Income</string>
+    <string name="cosmetics">Cosmetics</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="transportation">Transportation</string>
+    <string name="fitness">Fitness</string>
+    <string name="food">Food</string>
+    <string name="health">Health</string>
+    <string name="hygiene">Hygiene</string>
+    <string name="miscellaneous">Miscellaneous</string>
+    <string name="education">Education</string>
+    <string name="shopping">Shopping</string>
+    <string name="utilities">Utilities</string>
+
+
+    <!-- Item -->
+    <string name="item_name">Item Name</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="item_value">Item Value</string>
+    <string name="item_type_icon">Item Type Icon</string>
+    <string name="set_date">Set Date</string>
+    <string name="set_time">Set Time</string>
+
+    <string name="enter_item_name">Enter item name&#8230;</string>
+    <string name="enter_amount">Enter amount&#8230;</string>
+
+    <!-- Splash Screen -->
+    <string name="app_icon_desc">SaveUp Icon</string>
+
+    <!-- Confirmation -->
+    <string name="confirmation">Confirmation</string>
+    <string name="confirmation_no">No</string>
+    <string name="confirmation_yes">Yes</string>
+    
+    <!-- Options Dialog -->
+    <string name="view">&#160;View</string>
+    <string name="restore">&#160;Restore</string>
+    <string name="delete">&#160;Delete</string>
+    <string name="edit">&#160;Edit</string>
+    <string name="remove">&#160;Remove</string>
+
+    <!--Icons -->
+    <string name="dark_mode_icon_desc">Dark Mode Icon</string>
+    <string name="bookmark_icon_desc">Bookmark Icon</string>
+    <string name="include_items_icon_desc">Include Items Icon</string>
+    <string name="drop_down_icon_desc">Drop Down Icon</string>
+    <string name="automatically_delete_items_icon_desc">Automatically Delete Items Icon</string>
+    <string name="delete_all_data_icon_desc">Delete All Data Icon</string>
+    <string name="add_bookmark_icon_desc">Add Bookmark</string>
+
+    <!-- Settings -->
+    <string name="dark_mode_settings">Dark Mode</string>
+    <string name="bookmark_settings">Bookmark</string>
+    <string name="include_items_settings">Include Items</string>
+    <string name="automatically_delete_items_settings">Automatically Delete Items</string>
+    <string name="delete_all_data_settings">Delete All Data</string>
+    <string name="date_icon">Date Icon</string>
+
+    <!-- Statistics -->
+    <string name="pick_a_date_settings">Pick a Date</string>
+    <string name="money_distribution_settings">Money Distribution</string>
+    <string name="expenses_activity">Expenses Activity</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+    <string name="money_status">Money Status</string>
+
+
+    <!-- Credits -->
+    <string name="programmer">Programmer</string>
+    <string name="glen">John Glen Falceso</string>
+    <string name="icons_designer">Icons Designer</string>
+    <string name="adona">Clara Adrienne Adona</string>
+    <string name="researcher">Researchers</string>
+    <string name="valdez">Alliyah Faye Valdez</string>
+    <string name="mayor">Yuri Mayor</string>
+    <string name="github_dependencies">Github Dependencies</string>
+
+
 </resources>

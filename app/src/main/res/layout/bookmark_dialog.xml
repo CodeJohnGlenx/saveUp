@@ -8,15 +8,17 @@
     android:gravity="center"
     android:layout_height="match_parent">
 
-    <TextView android:id="@+id/bookmark_dialog_title"
+    <TextView
+        android:id="@+id/bookmark_dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose Bookmark"
         android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:textSize="30sp"
         android:gravity="center"
-        />
+        android:text="@string/choose_bookmark"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:maxLines="1"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookmark_dialog_recycler_view"
         android:layout_width="match_parent"

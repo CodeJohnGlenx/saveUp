@@ -35,10 +35,53 @@
     </style>
     -->
 
+    <style name="time_picker_dark_theme" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:timePickerStyle">@style/MyTimePicker</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/dark_grey_three</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/green</item>
+        <item name="android:textColorTertiary">@color/white</item>
+    </style>
+
+    <style name="time_picker_light_theme" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:timePickerStyle">@style/MyTimePicker</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColorPrimary">@color/dark_grey</item>
+        <item name="android:textColorSecondary">@color/green</item>
+        <item name="android:textColorTertiary">@color/dark_grey</item>
+    </style>
+
+    <style name="MyTimePicker" parent="android:Widget.Material.TimePicker">
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+
 
     <style name="LightTheme">
         <item name="android:background">@color/white</item>
         <item name="android:textColor">@color/dark_grey</item>
     </style>
+
+
+    <style name="date_picker_dark_theme" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>                   <!--header background-->
+        <item name="android:windowBackground">@color/dark_grey_three</item>     <!--calendar background-->
+        <item name="android:colorControlActivated">@color/colorAccent</item> <!--selected day-->
+        <item name="android:textColorPrimary">@color/white</item> <!--days of the month-->
+        <item name="android:textColorSecondary">@color/colorAccent</item>    <!--days of the week-->
+    </style>
+
+    <style name="date_picker_light_theme" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>                   <!--header background-->
+        <item name="android:windowBackground">@color/white</item>     <!--calendar background-->
+        <item name="android:colorControlActivated">@color/colorAccent</item> <!--selected day-->
+        <item name="android:textColorPrimary">@color/dark_grey</item> <!--days of the month-->
+        <item name="android:textColorSecondary">@color/colorAccent</item>    <!--days of the week-->
+    </style>
+
+
+
+
 
 </resources>

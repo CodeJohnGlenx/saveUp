@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view_bookmark_fill_up_dialog_settings_fragment"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/bookmark_fill_up_dialog_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/img_bookmark_fill_up_type_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/sample_logo_1"
+            android:contentDescription="@string/item_type_icon"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_bookmark_fill_up_type_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_bookmark_fill_up_type_icon"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/img_bookmark_fill_up_type_icon"
+            tools:text="Text View"
+            android:textColor="@color/dark_grey"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:maxLines="1"/>
+
+
+        <TextView
+            android:id="@+id/tv_bookmark_fill_up_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_bookmark_fill_up_type_icon"
+            android:layout_marginTop="5dp"
+            android:text="@string/item_name"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_bookmark_title"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_bookmark_fill_up_title"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/fill_up_border"
+            android:hint="@string/enter_item_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/dark_grey"
+            android:textColorHint="@color/grey"
+            android:textSize="18sp"
+            android:maxLines="1"/>
+
+
+        <TextView
+            android:id="@+id/tv_bookmark_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_bookmark_title"
+            android:layout_marginTop="5dp"
+            android:text="@string/item_value"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_bookmark_monetary_value"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/tv_bookmark_value"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/fill_up_border"
+            android:textSize="18sp"
+            android:hint="@string/enter_amount"
+            android:inputType="numberDecimal"
+            android:textColor="@color/dark_grey"
+            android:textColorHint="@color/grey"
+            android:padding="10dp"
+            android:importantForAutofill="no"
+            android:maxLines="1"/>
+
+
+        <Button
+            android:id="@+id/bookmark_btn_close"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/et_bookmark_monetary_value"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/bookmark_btn_done"
+            android:background="@mipmap/ic_close" />
+
+        <Button
+            android:id="@+id/bookmark_btn_done"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/et_bookmark_monetary_value"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:background="@mipmap/ic_done" />
+
+
+
+
+    </RelativeLayout>
+
+</ScrollView>

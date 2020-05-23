@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_edit_dialog_scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/item_edit_dialog_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/iv_edit_item_type_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/sample_logo_1"
+            android:contentDescription="@string/item_type_icon"/>
+
+
+        <TextView
+            android:id="@+id/tv_edit_fill_up_type_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_edit_item_type_icon"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:maxLines="1"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/iv_edit_item_type_icon"
+            tools:text="Text View"
+            android:textSize="36sp"
+            android:textColor="@color/dark_grey"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_edit_fill_up_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_edit_item_type_icon"
+            android:layout_marginTop="15dp"
+            android:text="@string/item_name"
+            android:textColor="@color/dark_grey"
+            android:textSize="26sp" />
+
+        <EditText
+            android:id="@+id/et_edit_title"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_edit_fill_up_title"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/fill_up_border"
+            android:hint="@string/enter_item_name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/dark_grey"
+            android:textColorHint="@color/grey"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/tv_edit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_edit_title"
+            android:layout_marginTop="15dp"
+            android:text="@string/date"
+            android:textColor="@color/dark_grey"
+            android:textSize="26sp" />
+
+        <Button
+            android:id="@+id/btn_edit_set_date"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/tv_edit_date"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_green_button_state"
+            android:text="@string/set_date"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_edit_date_value"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/btn_edit_set_date"
+            android:layout_below="@id/tv_edit_date"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/fill_up_border"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/dark_grey"
+            tools:text="Jan 20, 2015"
+            android:textSize="26sp"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/tv_edit_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_edit_set_date"
+            android:layout_marginTop="15dp"
+            android:text="@string/time"
+            android:textColor="@color/dark_grey"
+            android:textSize="26sp" />
+
+        <Button
+            android:id="@+id/btn_edit_set_time"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/tv_edit_time"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_green_button_state"
+            android:text="@string/set_time"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_edit_time_value"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_edit_time"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/btn_edit_set_time"
+            android:background="@drawable/fill_up_border"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="26sp"
+            tools:text="12:10 AM" />
+
+        <TextView
+            android:id="@+id/tv_edit_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_edit_set_time"
+            android:layout_marginTop="15dp"
+            android:text="@string/item_value"
+            android:textColor="@color/dark_grey"
+            android:textSize="26sp" />
+
+        <EditText
+            android:id="@+id/et_edit_monetary_value"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_edit_value"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/fill_up_border"
+            android:textSize="26sp"
+            android:hint="@string/enter_amount"
+            android:inputType="numberDecimal"
+            android:textColor="@color/dark_grey"
+            android:textColorHint="@color/grey"
+            android:padding="10dp"
+            android:importantForAutofill="no"
+            android:maxLines="1"/>
+
+        <Button
+            android:id="@+id/btn_edit_close"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_below="@id/et_edit_monetary_value"
+            android:layout_toEndOf="@id/et_edit_monetary_value"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@mipmap/ic_close"
+            android:layout_marginStart="30dp"/>
+
+        <Button
+            android:id="@+id/btn_edit_done"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_below="@id/et_edit_monetary_value"
+            android:layout_marginTop="15dp"
+            android:background="@mipmap/ic_done"
+            android:layout_toEndOf="@id/btn_edit_close"/>
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

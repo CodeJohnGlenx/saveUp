@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_home_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -13,7 +13,9 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progressCardView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        card_view:contentPaddingTop="15dp"
+        card_view:contentPaddingBottom="15dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:elevation="10dp"
         card_view:cardBackgroundColor="@color/light_white">
@@ -28,7 +30,6 @@
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:padding="2dp"
@@ -38,10 +39,11 @@
                 android:id="@+id/tv_fund"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/progressBar"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="-30dp"
-                android:text="Asset"
+                android:layout_below="@+id/progressBar"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/income"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
@@ -50,10 +52,10 @@
                 android:id="@+id/tv_fund_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_fund"
+                android:layout_below="@+id/tv_fund"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="-25dp"
-                android:text="1000.00"
+                android:layout_alignParentStart="true"
+                tools:text="1000.00"
                 android:textSize="18sp"
                 android:textColor="@color/dark_grey"/>
 
@@ -61,12 +63,11 @@
                 android:id="@+id/tv_expenses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/progressBar"
+                android:layout_below="@id/progressBar"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-30dp"
-                android:text="Expenditures"
+                android:layout_marginTop="5dp"
+                android:text="@string/expenses"
                 android:textColor="@color/dark_grey"
-                android:layout_centerInParent="true"
                 android:textSize="18sp" />
 
 
@@ -74,10 +75,9 @@
                 android:id="@+id/tv_expenses_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_fund"
+                android:layout_below="@+id/tv_fund"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-25dp"
-                android:text="1000.00"
+                tools:text="1000.00"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
@@ -85,11 +85,11 @@
                 android:id="@+id/tv_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/progressBar"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="-30dp"
-                android:text="Balance"
+                android:layout_below="@+id/progressBar"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/balance"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
@@ -98,28 +98,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/tv_balance"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="22dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="-24dp"
-                android:text="1000.00"
+                tools:text="1000.00"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
 
 
         </RelativeLayout>
 
-
-        <!-- android:progressDrawable="@drawable/custom_progress_bar_green" -->
-
-
     </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/fragment_home_view_one"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/progressCardView"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignTop="@+id/progressCardView"
-        android:layout_marginTop="105dp"
+        android:layout_below="@id/fragment_home_view_one"
         android:layoutAnimation="@anim/layout_animation"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -127,12 +129,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/recyclerView"
-        android:layout_alignBottom="@+id/recyclerView"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="60dp"
+        android:layout_above="@+id/floatingActionButton"
+        android:layout_marginBottom="-25dp"
         android:backgroundTint="@color/yellow"
         android:clickable="true"
-        android:padding="0dp"
+        android:focusable="true"
         android:scaleType="fitXY"
         android:src="@drawable/ic_bookmark_two_foreground"
         android:tint="@color/white"
@@ -144,15 +145,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/recyclerView"
-        android:layout_alignBottom="@+id/floatingActionButtonBookmark"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="-70dp"
+        android:layout_alignBottom="@+id/recyclerView"
         android:backgroundTint="@color/white"
         android:clickable="true"
-        android:padding="0dp"
+        android:layout_marginBottom="10dp"
+        android:focusable="true"
         android:scaleType="fitXY"
         android:src="@drawable/ic_add_info"
-        app:borderWidth="0dp"
         app:useCompatPadding="true" />
 
 

@@ -2,6 +2,7 @@
 
 <androidx.cardview.widget.CardView android:layout_height="50dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/selection_card_view"
     android:layout_width="match_parent"
     app:cardBackgroundColor="@color/settings_card_view_light_mode_state"
@@ -18,13 +19,14 @@
             android:layout_height="25dp"
             android:tint="@color/dark_grey"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_calendar"/>
+            android:src="@drawable/ic_calendar"
+            android:contentDescription="@string/date_icon"/>
 
         <TextView
             android:id="@+id/tv_selection_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This Freakin Day"
+            tools:text="This Freakin Day"
             android:textSize="16sp"
             android:layout_toEndOf="@id/img_settings_selection"
             android:layout_marginStart="10dp"
